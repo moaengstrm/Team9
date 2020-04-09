@@ -10,12 +10,15 @@ package testprojekt;
  * @author isakj
  */
 public class TestProjekt {
+    
+    private static MainWindow mainWindow = new MainWindow();
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        mainWindow.setVisible(true);
         
     }
     

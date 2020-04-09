@@ -5,21 +5,42 @@
  */
 package testprojekt;
 
+import java.awt.Cursor;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+
+
 /**
  *
  * @author isakj
  */
 public class Blog extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MainWindow
-     */
+    Profile profile;
     
     CreatePost createPost;
+    MouseAdapter clickListener = (new MouseAdapter() {  
+        public void mouseClicked(MouseEvent c)  
+        {  
+           profile = new Profile("Andreas", "133742069", "andreas@ask.se");
+           profile.setVisible(true);
+        }  
+    });
+    MouseAdapter hoverListener = (new MouseAdapter() {
+         public void mouseEntered(MouseEvent en) {
+            setCursor(new Cursor(Cursor.HAND_CURSOR));
+         }
+         public void mouseExited(MouseEvent ex) {
+            setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+         }
+    });
     
     public Blog() {
         initComponents();
         setLocationRelativeTo(this);
+        lblAuthor1.addMouseListener(clickListener);
+        lblAuthor1.addMouseListener(hoverListener);
         
         createPost = new CreatePost();
         
@@ -57,8 +78,10 @@ public class Blog extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jToggleButton1 = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jScrollPane2.setForeground(new java.awt.Color(255, 255, 255));
         jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -69,8 +92,10 @@ public class Blog extends javax.swing.JFrame {
 
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
+        jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
-        jTextArea1.setText("Hej\nVill bara informera om att Scrumwise har ett intressant sätt att hantera konton. I grunden \nkan man enbart skapa ett konto per e-postadress. Dock är det ju så att man kan \nvilja/behöva vara med i olika Scrumwise projekt. För att inte behöva skapa nytt \ne-postkonto för varje projekt så används + för att särskilja mellan olika konton. ");
+        jTextArea1.setText("Hej\nVill bara informera om att Scrumwise har ett intressant sätt att hantera konton. I grunden kan man enbart skapa ett konto per e-postadress. Dock är det ju så att man kan vilja/behöva vara med i olika Scrumwise projekt. För att inte behöva skapa nytt e-postkonto för varje projekt så används + för att särskilja mellan olika konton. ");
+        jTextArea1.setWrapStyleWord(true);
         jScrollPane1.setViewportView(jTextArea1);
 
         jLabel1.setText("Konto för Scrumwise och användning av + för att koppla en e-postadress");
@@ -78,9 +103,9 @@ public class Blog extends javax.swing.JFrame {
         jLabel2.setText("Skrivet av");
         jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        lblAuthor1.setForeground(new java.awt.Color(255, 0, 0));
-        lblAuthor1.setText("Andreas");
-        lblAuthor1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblAuthor1.setForeground(new java.awt.Color(51, 102, 255));
+        lblAuthor1.setText("<HTML><U>Andreas</U></HTML>");
+        lblAuthor1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -94,7 +119,7 @@ public class Blog extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblAuthor1)
+                        .addComponent(lblAuthor1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -107,7 +132,7 @@ public class Blog extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblAuthor1)
+                    .addComponent(lblAuthor1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(23, 23, 23))
         );
@@ -116,8 +141,10 @@ public class Blog extends javax.swing.JFrame {
 
         jTextArea3.setEditable(false);
         jTextArea3.setColumns(20);
+        jTextArea3.setLineWrap(true);
         jTextArea3.setRows(5);
-        jTextArea3.setText("Hej alla Team!\n\nNu har jag gjort uppdateringar på samtliga teamloggar, kika in på er teamlogg och följ \nanvisningar där (dvs. svara på mitt meddelande). Om teamloggen inte fungerar ber jag \nteamets Scrum Master att höra av sig till mig så att jag kan lösa det för er.\n");
+        jTextArea3.setText("Hej alla Team!\n\nNu har jag gjort uppdateringar på samtliga teamloggar, kika in på er teamlogg och följ anvisningar där (dvs. svara på mitt meddelande). Om teamloggen inte fungerar ber jag teamets Scrum Master att höra av sig till mig så att jag kan lösa det för er.\n");
+        jTextArea3.setWrapStyleWord(true);
         jScrollPane4.setViewportView(jTextArea3);
 
         jLabel5.setText("Teamloggar");
@@ -125,9 +152,9 @@ public class Blog extends javax.swing.JFrame {
         jLabel6.setText("Skrivet av");
         jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        lblAuthor3.setForeground(new java.awt.Color(255, 0, 0));
+        lblAuthor3.setForeground(new java.awt.Color(0, 0, 0));
         lblAuthor3.setText("Tanja");
-        lblAuthor3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblAuthor3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -136,7 +163,7 @@ public class Blog extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel6)
@@ -163,8 +190,10 @@ public class Blog extends javax.swing.JFrame {
 
         jTextArea5.setEditable(false);
         jTextArea5.setColumns(20);
+        jTextArea5.setLineWrap(true);
         jTextArea5.setRows(5);
-        jTextArea5.setText("Hej på er,\n\nJag fick under eftermiddagen några frågor gällande kursens upplägg.\n\nGällande uppgifterna som tillhör kursträffarna ?team uppgifter? är detta \ndiskussionspunkter som ni ska diskutera under kursträffarna. Imorgon, onsdag \noch även på torsdag kommer jag att introducera ämnet och därefter kommer \nvarje team att gå över till respektive team sessions rum i Collaborate för att \ndiskutera de punkter som tillhör dagens ämne (som är kopplade till den litteratur \nsom ni läst inför varje kursträff). Tiden för dessa är alltså inom kursträffens tider. \nSyftet med dessa diskussionstillfällen är att snabbt få igång samarbetet i respektive \nteam. \n");
+        jTextArea5.setText("Hej på er,\n\nJag fick under eftermiddagen några frågor gällande kursens upplägg.\n\nGällande uppgifterna som tillhör kursträffarna ?team uppgifter? är detta diskussionspunkter som ni ska diskutera under kursträffarna. Imorgon, onsdag och även på torsdag kommer jag att introducera ämnet och därefter kommer varje team att gå över till respektive team sessions rum i Collaborate för att diskutera de punkter som tillhör dagens ämne (som är kopplade till den litteratur som ni läst inför varje kursträff). Tiden för dessa är alltså inom kursträffens tider. Syftet med dessa diskussionstillfällen är att snabbt få igång samarbetet i respektive team. \n");
+        jTextArea5.setWrapStyleWord(true);
         jScrollPane6.setViewportView(jTextArea5);
 
         jLabel9.setText("Förtydligande gällande kursupplägg");
@@ -172,7 +201,7 @@ public class Blog extends javax.swing.JFrame {
         jLabel10.setText("Skrivet av");
         jLabel10.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        lblAuthor5.setForeground(new java.awt.Color(255, 0, 0));
+        lblAuthor5.setForeground(new java.awt.Color(0, 0, 0));
         lblAuthor5.setText("Tanja");
         lblAuthor5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
@@ -183,7 +212,7 @@ public class Blog extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel10)
@@ -198,12 +227,12 @@ public class Blog extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(lblAuthor5))
-                .addGap(23, 23, 23))
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblAuthor5)
+                    .addComponent(jLabel10))
+                .addGap(40, 40, 40))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -215,7 +244,7 @@ public class Blog extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGap(0, 0, 0))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,40 +265,46 @@ public class Blog extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Filter:");
+        jLabel3.setText("Filter");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Kategori --", "Jobb", "Fritid" }));
+
+        jToggleButton1.setText("Visa");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(73, Short.MAX_VALUE))
+                        .addComponent(jLabel3)
+                        .addGap(6, 6, 6)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(13, 13, 13)
+                        .addComponent(jToggleButton1))
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(366, Short.MAX_VALUE))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jToggleButton1))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(321, Short.MAX_VALUE))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
         pack();
@@ -280,41 +315,11 @@ public class Blog extends javax.swing.JFrame {
         createPost.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Blog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Blog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Blog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Blog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Blog().setVisible(true);
-            }
-        });
-    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -325,26 +330,21 @@ public class Blog extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea3;
-    private javax.swing.JTextArea jTextArea4;
     private javax.swing.JTextArea jTextArea5;
+    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JLabel lblAuthor1;
     private javax.swing.JLabel lblAuthor3;
-    private javax.swing.JLabel lblAuthor4;
     private javax.swing.JLabel lblAuthor5;
     // End of variables declaration//GEN-END:variables
 }
