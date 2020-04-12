@@ -17,13 +17,13 @@ public class MainWindow extends javax.swing.JFrame {
      * Creates new form MainWindow
      */
     
-    Blog blog;
+    BlogV2 blog;
     
     public MainWindow() {
         initComponents();
         setLocationRelativeTo(this);
         
-        blog = new Blog();
+        blog = new BlogV2();
     }
 
     /**

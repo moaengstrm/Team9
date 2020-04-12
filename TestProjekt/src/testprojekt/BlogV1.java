@@ -15,11 +15,11 @@ import java.awt.event.MouseEvent;
  *
  * @author isakj
  */
-public class Blog extends javax.swing.JFrame {
+public class BlogV1 extends javax.swing.JFrame {
 
     Profile profile;
     
-    CreatePost createPost;
+    //CreatePost createPost;
     MouseAdapter clickListener = (new MouseAdapter() {  
         public void mouseClicked(MouseEvent c)  
         {  
@@ -36,13 +36,13 @@ public class Blog extends javax.swing.JFrame {
          }
     });
     
-    public Blog() {
+    public BlogV1() {
         initComponents();
         setLocationRelativeTo(this);
         lblAuthor1.addMouseListener(clickListener);
         lblAuthor1.addMouseListener(hoverListener);
         
-        createPost = new CreatePost();
+        //createPost = new CreatePost();
         
     }
 
@@ -303,7 +303,7 @@ public class Blog extends javax.swing.JFrame {
                     .addComponent(jToggleButton1))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(321, Short.MAX_VALUE))
+                .addContainerGap(303, Short.MAX_VALUE))
             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
@@ -312,7 +312,7 @@ public class Blog extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        createPost.setVisible(true);
+        //createPost.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
