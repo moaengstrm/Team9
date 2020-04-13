@@ -30,6 +30,10 @@ public class BlogPostTemplate extends javax.swing.JPanel {
         lblAuthor.setText(author);
     }
     
+    public void setDate(String date) {
+        lblDate.setText(date);
+    }
+    
     public javax.swing.JTextArea getTextArea() {
         return txtText;
     }
@@ -47,6 +51,7 @@ public class BlogPostTemplate extends javax.swing.JPanel {
         lblWrittenBy = new javax.swing.JLabel();
         lblAuthor = new javax.swing.JLabel();
         txtText = new javax.swing.JTextArea();
+        lblDate = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -63,6 +68,9 @@ public class BlogPostTemplate extends javax.swing.JPanel {
         txtText.setText("Text");
         txtText.setWrapStyleWord(true);
 
+        lblDate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblDate.setText("yyyy-MM-dd");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -70,16 +78,15 @@ public class BlogPostTemplate extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtText, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())
+                    .addComponent(lblTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblWrittenBy)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblAuthor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(239, 239, 239))))
+                        .addComponent(lblAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                        .addGap(122, 122, 122)
+                        .addComponent(lblDate, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtText))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -91,7 +98,8 @@ public class BlogPostTemplate extends javax.swing.JPanel {
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblWrittenBy)
-                    .addComponent(lblAuthor))
+                    .addComponent(lblAuthor)
+                    .addComponent(lblDate))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -99,6 +107,7 @@ public class BlogPostTemplate extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lblAuthor;
+    private javax.swing.JLabel lblDate;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblWrittenBy;
     private javax.swing.JTextArea txtText;

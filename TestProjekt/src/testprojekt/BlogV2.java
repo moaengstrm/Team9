@@ -10,7 +10,10 @@ import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -24,10 +27,14 @@ import javax.swing.event.DocumentListener;
 public class BlogV2 extends javax.swing.JFrame {
     
     Profile profile;
+    Validator validator;
+    SimpleDateFormat dateFormat;
+    
     ArrayList<HashMap<String, String>> posts;
     ArrayList<BlogPost> blogPosts;
     
     int displayPage;
+    
 
     MouseAdapter clickListenerNext = (new MouseAdapter() {  
         public void mouseClicked(MouseEvent c)  
@@ -56,6 +63,10 @@ public class BlogV2 extends javax.swing.JFrame {
     
     public BlogV2() {
         initComponents();
+        
+        validator = new Validator();
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        
         setLocationRelativeTo(this);
         pnlNewPostTab.setVisible(false);
         txtText.getDocument().addDocumentListener(new DocumentListener() {
@@ -88,12 +99,16 @@ public class BlogV2 extends javax.swing.JFrame {
     }
     
     public void createSamplePosts() {
-        blogPosts.add(new BlogPost("Tanja", "Förtydligande Grupprapport", "Viktigt! \n \nGruppindelningen för grupprapporten finns under teamsammanställningen. \n \nDetta innebär att Grupp A i varje team skriver en egen rapport där de besvarar samtliga 3 uppgifter/frågor, och Grupp B i varje team skriver en egen rapport där de besvarar samtliga 3 uppgifter/frågor. \n \nNär ni lämnar in rapporten märk denna med Grupp nr och A/B (Ex. \"Grupp1A\")"));
-        blogPosts.add(new BlogPost("Tanja", "Teamloggar", "Hej alla Team! \\n \\nNu har jag gjort uppdateringar på samtliga teamloggar, kika in på er teamlogg och följ anvisningar där (dvs. svara på mitt meddelande). Om teamloggen inte fungerar ber jag teamets Scrum Master att höra av sig till mig så att jag kan lösa det för er. \\n \\n//Tanja"));
-        blogPosts.add(new BlogPost("Mathias", "Bokning av möten", "Hej \n \nGrupp 4, 5, 6 och 7 hittar en länk för att boka tid för customer meeting och sprintplaneringsmöte 1 under respektive teams loggar. \n\nVänligen \nMathias"));
-        blogPosts.add(new BlogPost("Andreas", "Test-test", "God afton"));
-        blogPosts.add(new BlogPost("Mathias", "HEJ", "Fest hos mig ikväll"));
-        blogPosts.add(new BlogPost("Admin", "titel", "Text text text text text text text text text text text text text text text text text text text text text text text text text "));
+        try {
+            blogPosts.add(new BlogPost("Tanja", dateFormat.parse("2020-04-12"), "Förtydligande Grupprapport", "Viktigt! \n \nGruppindelningen för grupprapporten finns under teamsammanställningen. \n \nDetta innebär att Grupp A i varje team skriver en egen rapport där de besvarar samtliga 3 uppgifter/frågor, och Grupp B i varje team skriver en egen rapport där de besvarar samtliga 3 uppgifter/frågor. \n \nNär ni lämnar in rapporten märk denna med Grupp nr och A/B (Ex. \"Grupp1A\")"));
+            blogPosts.add(new BlogPost("Tanja", dateFormat.parse("2020-04-05"), "Teamloggar", "Hej alla Team! \\n \\nNu har jag gjort uppdateringar på samtliga teamloggar, kika in på er teamlogg och följ anvisningar där (dvs. svara på mitt meddelande). Om teamloggen inte fungerar ber jag teamets Scrum Master att höra av sig till mig så att jag kan lösa det för er. \\n \\n//Tanja"));
+            blogPosts.add(new BlogPost("Mathias", dateFormat.parse("2020-04-01"), "Bokning av möten", "Hej \n \nGrupp 4, 5, 6 och 7 hittar en länk för att boka tid för customer meeting och sprintplaneringsmöte 1 under respektive teams loggar. \n\nVänligen \nMathias"));
+            blogPosts.add(new BlogPost("Andreas", dateFormat.parse("2019-12-24"), "Hallåröh", "God jul!"));
+            blogPosts.add(new BlogPost("Mathias", dateFormat.parse("2019-05-03"), "HEJ", "Fest hos mig ikväll"));
+            blogPosts.add(new BlogPost("Admin", dateFormat.parse("2011-01-01"), "TestTitel", "Text text text text text text text text text text text text text text text text text text text text text text text text text "));
+        } catch(ParseException pe) {
+            System.out.println(pe.getMessage());
+        }
     }
     
     public void addPost(BlogPost post) {
@@ -112,6 +127,8 @@ public class BlogV2 extends javax.swing.JFrame {
             template.setAuthor(blogPosts.get(post).getAuthor());
             template.setText(blogPosts.get(post).getText());
             template.setTitle(blogPosts.get(post).getTitle());
+            String date = formatDate(blogPosts.get(post).getDate());
+            template.setDate(date);
         }
         else {
             template.setVisible(false);
@@ -188,6 +205,11 @@ public class BlogV2 extends javax.swing.JFrame {
         }
     }
     
+    public String formatDate(Date date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return dateFormat.format(date);
+    }
+    
     
 
     /**
@@ -218,17 +240,19 @@ public class BlogV2 extends javax.swing.JFrame {
         lblFilter = new javax.swing.JLabel();
         cbCategory = new javax.swing.JComboBox<>();
         btnShow = new javax.swing.JToggleButton();
+        jComboBox2 = new javax.swing.JComboBox<>();
         pnlNewPostTab = new javax.swing.JPanel();
         lblTitle = new javax.swing.JLabel();
         txtTitle = new javax.swing.JTextField();
         scrollPane = new javax.swing.JScrollPane();
         txtText = new javax.swing.JTextArea();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbCategoryNewPost = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         btnPost = new javax.swing.JButton();
         lblLetterCount = new javax.swing.JLabel();
         lblMaxLetters = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jComboBox3 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -265,27 +289,26 @@ public class BlogV2 extends javax.swing.JFrame {
             .addComponent(post5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(post1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(pnlBlogPostsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlBlogPostsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(pnlBlogPostsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlBlogPostsLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblShowing)
                         .addGap(0, 0, 0)
                         .addComponent(lblShowingAmount))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlBlogPostsLayout.createSequentialGroup()
+                    .addGroup(pnlBlogPostsLayout.createSequentialGroup()
+                        .addGap(48, 48, 48)
                         .addComponent(lblPrevious, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(pnlBlogPostsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlBlogPostsLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblNext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(pnlBlogPostsLayout.createSequentialGroup()
-                        .addGap(0, 0, 0)
                         .addComponent(lblSlash)
                         .addGap(0, 0, 0)
                         .addComponent(lblTotalAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBlogPostsLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblNext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(67, 67, 67))))
         );
         pnlBlogPostsLayout.setVerticalGroup(
             pnlBlogPostsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -332,6 +355,8 @@ public class BlogV2 extends javax.swing.JFrame {
             }
         });
 
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Formella inlägg", "Informella inlägg" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -339,28 +364,34 @@ public class BlogV2 extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnNewPost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblFilter)
-                        .addGap(6, 6, 6)
-                        .addComponent(cbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(13, 13, 13)
-                        .addComponent(btnShow))
-                    .addComponent(btnNewPost, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addComponent(scrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 624, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jComboBox2, 0, 132, Short.MAX_VALUE)
+                            .addComponent(cbCategory, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnShow, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(scrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(lblFilter)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblFilter)
                     .addComponent(cbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnShow))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(71, 71, 71)
                 .addComponent(btnNewPost, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(scrollPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)
+                .addContainerGap(250, Short.MAX_VALUE))
+            .addComponent(scrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout pnlBlogTabLayout = new javax.swing.GroupLayout(pnlBlogTab);
@@ -395,10 +426,10 @@ public class BlogV2 extends javax.swing.JFrame {
         });
         scrollPane.setViewportView(txtText);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Kategori --", "Jobb", "Fritid" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        cbCategoryNewPost.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Kategori --", "Jobb", "Fritid" }));
+        cbCategoryNewPost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                cbCategoryNewPostActionPerformed(evt);
             }
         });
 
@@ -429,6 +460,8 @@ public class BlogV2 extends javax.swing.JFrame {
             }
         });
 
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Formellt inlägg", "Informellt inlägg" }));
+
         javax.swing.GroupLayout pnlNewPostTabLayout = new javax.swing.GroupLayout(pnlNewPostTab);
         pnlNewPostTab.setLayout(pnlNewPostTabLayout);
         pnlNewPostTabLayout.setHorizontalGroup(
@@ -436,19 +469,21 @@ public class BlogV2 extends javax.swing.JFrame {
             .addGroup(pnlNewPostTabLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlNewPostTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlNewPostTabLayout.createSequentialGroup()
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(291, 291, 291)
+                        .addComponent(btnPost, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 400, Short.MAX_VALUE))
                     .addComponent(scrollPane)
                     .addGroup(pnlNewPostTabLayout.createSequentialGroup()
                         .addComponent(lblTitle)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtTitle))
                     .addGroup(pnlNewPostTabLayout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(291, 291, 291)
-                        .addComponent(btnPost, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 400, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlNewPostTabLayout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(cbCategoryNewPost, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblLetterCount, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -469,8 +504,9 @@ public class BlogV2 extends javax.swing.JFrame {
                 .addGroup(pnlNewPostTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblMaxLetters)
                     .addComponent(lblLetterCount)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(cbCategoryNewPost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1)
+                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
                 .addGroup(pnlNewPostTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnPost, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -514,9 +550,9 @@ public class BlogV2 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTextPropertyChange
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void cbCategoryNewPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCategoryNewPostActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_cbCategoryNewPostActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -527,12 +563,16 @@ public class BlogV2 extends javax.swing.JFrame {
         String author = "Admin";
         String title = txtTitle.getText();
         String text = txtText.getText();
-        BlogPost post = new BlogPost(author, title, text);
-        addPost(post);
-        displayPage = 0;
-        displayPosts(displayPage);
-        pnlNewPostTab.setVisible(false);
-        pnlBlogTab.setVisible(true);
+        String category = cbCategoryNewPost.getSelectedItem().toString();
+        
+        if (validator.validateNewPost(title, text, category)) {
+            BlogPost post = new BlogPost(author, new Date(), title, text);
+            addPost(post);
+            displayPage = 0;
+            displayPosts(displayPage);
+            pnlNewPostTab.setVisible(false);
+            pnlBlogTab.setVisible(true);
+        }
     }//GEN-LAST:event_btnPostActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -549,9 +589,11 @@ public class BlogV2 extends javax.swing.JFrame {
     private javax.swing.JButton btnPost;
     private javax.swing.JToggleButton btnShow;
     private javax.swing.JComboBox<String> cbCategory;
+    private javax.swing.JComboBox<String> cbCategoryNewPost;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblFilter;
     private javax.swing.JLabel lblLetterCount;

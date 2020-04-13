@@ -18,9 +18,9 @@ public class BlogPost {
     private String title;
     private String text;
     
-    public BlogPost(String author, /* Date date */ String title, String text) {
+    public BlogPost(String author, Date date, String title, String text) {
         this.author = author;
-        // date = 
+        this.date = date; 
         this.title = title;
         this.date = date;
         this.text = text;
