@@ -44,6 +44,11 @@ public class NewCategoryWindow extends javax.swing.JFrame {
         lblAddNewCategory.setText("Lägg till ny kategori");
 
         btnAddNewCategory.setText("Lägg till");
+        btnAddNewCategory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddNewCategoryActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -79,6 +84,13 @@ public class NewCategoryWindow extends javax.swing.JFrame {
     private void txtCategoryNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCategoryNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCategoryNameActionPerformed
+
+    private void btnAddNewCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewCategoryActionPerformed
+        // TODO add your handling code here:
+        if(Validator.tfIsNotEmpty(txtCategoryName)){
+        this.dispose();
+        }
+    }//GEN-LAST:event_btnAddNewCategoryActionPerformed
 
    
 
