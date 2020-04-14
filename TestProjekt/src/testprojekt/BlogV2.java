@@ -29,8 +29,8 @@ public class BlogV2 extends javax.swing.JFrame {
     Profile profile;
     Validator validator;
     SimpleDateFormat dateFormat;
+    NewCategoryWindow newCategory; 
     
-    ArrayList<HashMap<String, String>> posts;
     ArrayList<BlogPost> blogPosts;
     
     int displayPage;
@@ -66,6 +66,7 @@ public class BlogV2 extends javax.swing.JFrame {
         
         validator = new Validator();
         dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        newCategory = new NewCategoryWindow();
         
         setLocationRelativeTo(this);
         pnlNewPostTab.setVisible(false);
@@ -433,7 +434,7 @@ public class BlogV2 extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Ny");
+        jButton1.setText("Ny kategori");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -473,7 +474,7 @@ public class BlogV2 extends javax.swing.JFrame {
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(291, 291, 291)
                         .addComponent(btnPost, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 400, Short.MAX_VALUE))
+                        .addGap(0, 380, Short.MAX_VALUE))
                     .addComponent(scrollPane)
                     .addGroup(pnlNewPostTabLayout.createSequentialGroup()
                         .addComponent(lblTitle)
@@ -556,6 +557,7 @@ public class BlogV2 extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        newCategory.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPostActionPerformed

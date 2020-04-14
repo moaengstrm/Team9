@@ -310,7 +310,7 @@
                           <Component id="jButton2" min="-2" pref="81" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="291" max="-2" attributes="0"/>
                           <Component id="btnPost" min="-2" pref="81" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="400" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="380" max="32767" attributes="0"/>
                       </Group>
                       <Component id="scrollPane" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
@@ -412,7 +412,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButton1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Ny"/>
+            <Property name="text" type="java.lang.String" value="Ny kategori"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
