@@ -391,7 +391,7 @@ public class BlogV2 extends javax.swing.JFrame {
                 .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(71, 71, 71)
                 .addComponent(btnNewPost, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(250, Short.MAX_VALUE))
+                .addContainerGap(222, Short.MAX_VALUE))
             .addComponent(scrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
