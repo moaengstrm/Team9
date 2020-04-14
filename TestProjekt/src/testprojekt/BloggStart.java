@@ -30,14 +30,16 @@ public class BloggStart {
     
     public static void main(final String[] args) {
         try {
-            idb = new InfDB("C://db//BloggData.fdb");
+            String aktuellMapp = System.getProperty("user.dir");
+            String sokVag = aktuellMapp + "\\BloggData.FDB";
+            idb = new InfDB(sokVag);
         }
         catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
             System.out.println("Internt felmeddelande:" + e.getMessage());
         }
         
-        new InloggSida(idb).setVisible(true); 
+        //new InloggSida(idb).setVisible(true); 
     }   
 
 }

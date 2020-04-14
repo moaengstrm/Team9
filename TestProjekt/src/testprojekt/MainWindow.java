@@ -6,6 +6,8 @@
 package testprojekt;
 
 import javax.swing.JOptionPane;
+import oru.inf.InfDB;
+import oru.inf.InfException;
 
 /**
  *
@@ -18,8 +20,19 @@ public class MainWindow extends javax.swing.JFrame {
      */
     
     BlogV2 blog;
+    InfDB idb;
     
     public MainWindow() {
+        try {
+            String aktuellMapp = System.getProperty("user.dir");
+            String sokVag = aktuellMapp + "\\DB\\BloggData.FDB";
+            idb = new InfDB(sokVag);
+        }
+        catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Något gick fel!");
+            System.out.println("Internt felmeddelande:" + e.getMessage());
+        }
+        
         initComponents();
         setLocationRelativeTo(this);
         
