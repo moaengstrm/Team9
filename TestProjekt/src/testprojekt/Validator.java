@@ -6,6 +6,7 @@
 package testprojekt;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -35,4 +36,19 @@ public class Validator {
         return valid;
     }
     
+        public static boolean tfIsNotEmpty(JTextField rutaAttKolla) {
+
+        // Sätter resultat till sant
+        boolean resultat = true;
+
+        // If-sats som kontrollerar om rutan är tom
+        if (rutaAttKolla.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "En eller flera textrutor är tomma!");
+            rutaAttKolla.requestFocus();
+            resultat = false;
+        }
+
+        // Returnerar resultat
+        return resultat;
+    }
 }
