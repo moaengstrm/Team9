@@ -24,6 +24,9 @@ public class ConfirmRegistration extends javax.swing.JFrame {
     public ConfirmRegistration() {
         initComponents();
         idb = TestProjekt.getDB();
+        
+        setLocationRelativeTo(this);
+        
         registrationControl.showRegistrations(listRequests);
         registrationControl.emptyFields(lblUserName, lblName, lblEmail, lblPhone);
     }
@@ -46,12 +49,13 @@ public class ConfirmRegistration extends javax.swing.JFrame {
         lblName = new javax.swing.JLabel();
         lblEmail = new javax.swing.JLabel();
         lblPhone = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnConfirm = new javax.swing.JButton();
+        btnDecline = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         listRequests = new javax.swing.JList<>();
+        jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -71,17 +75,19 @@ public class ConfirmRegistration extends javax.swing.JFrame {
 
         lblPhone.setText("jLabel8");
 
-        jButton1.setText("Godkänn");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnConfirm.setText("Godkänn");
+        btnConfirm.setEnabled(false);
+        btnConfirm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnConfirmActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Neka");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnDecline.setText("Neka");
+        btnDecline.setEnabled(false);
+        btnDecline.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnDeclineActionPerformed(evt);
             }
         });
 
@@ -103,7 +109,7 @@ public class ConfirmRegistration extends javax.swing.JFrame {
                             .addComponent(jLabel4)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(37, 37, 37)
-                                .addComponent(jButton1)))
+                                .addComponent(btnConfirm)))
                         .addGap(16, 16, 16)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -111,7 +117,7 @@ public class ConfirmRegistration extends javax.swing.JFrame {
                             .addComponent(lblPhone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(23, 23, 23)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnDecline, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 46, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
@@ -136,8 +142,8 @@ public class ConfirmRegistration extends javax.swing.JFrame {
                     .addComponent(lblPhone))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(btnConfirm)
+                    .addComponent(btnDecline))
                 .addGap(53, 53, 53))
         );
 
@@ -148,16 +154,28 @@ public class ConfirmRegistration extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(listRequests);
 
+        jButton1.setText("Tillbaka");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(78, 78, 78))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(48, 48, 48))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,7 +184,9 @@ public class ConfirmRegistration extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
 
         pack();
@@ -174,30 +194,39 @@ public class ConfirmRegistration extends javax.swing.JFrame {
 
     private void listRequestsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listRequestsValueChanged
         // TODO add your handling code here:
-        registrationControl.showInformation(listRequests, lblUserName, lblName, lblEmail, lblPhone);
+        registrationControl.showInformation(listRequests, lblUserName, lblName, lblEmail, lblPhone,
+                                            btnConfirm, btnDecline);
     }//GEN-LAST:event_listRequestsValueChanged
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
         // TODO add your handling code here:
         String userName = lblUserName.getText();
         registrationControl.acceptRegistration(userName);
         JOptionPane.showMessageDialog(null, "Användare registrerad!");
-    }//GEN-LAST:event_jButton1ActionPerformed
+        registrationControl.showRegistrations(listRequests);
+        registrationControl.emptyFields(lblUserName, lblName, lblEmail, lblPhone);
+    }//GEN-LAST:event_btnConfirmActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnDeclineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeclineActionPerformed
         // TODO add your handling code here:
         String userName = lblUserName.getText();
         registrationControl.denyRegistration(userName);
         JOptionPane.showMessageDialog(null, "Förfrågan borttagen");
         registrationControl.showRegistrations(listRequests);
         registrationControl.emptyFields(lblUserName, lblName, lblEmail, lblPhone);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnDeclineActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnConfirm;
+    private javax.swing.JButton btnDecline;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
