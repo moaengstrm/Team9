@@ -12,7 +12,7 @@ import oru.inf.InfException;
 
 /**
  *
- * @author Molly
+ * @author Mollyyyyy
  */
 public class InloggSida extends javax.swing.JFrame {
 
