@@ -4,20 +4,22 @@
  * and open the template in the editor.
  */
 package testprojekt;
-
+import javax.swing.JOptionPane;
+import oru.inf.InfDB;
+import oru.inf.InfException;
 /**
  *
  * @author Ludwig Ersson
  */
 public class NewCategoryWindow extends javax.swing.JFrame {
-
+    InfDB idb; 
     /**
      * Creates new form NewCategoryWindow
      */
     public NewCategoryWindow() {
         initComponents();
         setLocationRelativeTo(this); 
-        
+        idb = TestProjekt.getDB();
     }
 
     /**
@@ -44,6 +46,11 @@ public class NewCategoryWindow extends javax.swing.JFrame {
         lblAddNewCategory.setText("Lägg till ny kategori");
 
         btnAddNewCategory.setText("Lägg till");
+        btnAddNewCategory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddNewCategoryActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -77,8 +84,34 @@ public class NewCategoryWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtCategoryNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCategoryNameActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtCategoryNameActionPerformed
+
+    private void btnAddNewCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewCategoryActionPerformed
+        String newCategory = txtCategoryName.getText();
+
+        try {
+            String maxKaid = idb.fetchSingle("SELECT MAX(KAID) from kategori;");
+            System.out.println(maxKaid);
+            if(maxKaid.equals("null")){
+                maxKaid = "0";
+            }
+
+            int maxKaidInt = Integer.parseInt(maxKaid);
+            int maxKaidIntIncremented = maxKaidInt + 1; 
+
+            System.out.println(maxKaidIntIncremented);
+
+            String query = "insert into Kategori (KAID, Namn) values (" + maxKaidIntIncremented + ", '" + newCategory + "')";
+
+            idb.insert(query);
+
+            JOptionPane.showMessageDialog(null, "Kategorin '" + newCategory + "' har blivit tillagd.");
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_btnAddNewCategoryActionPerformed
 
    
 
