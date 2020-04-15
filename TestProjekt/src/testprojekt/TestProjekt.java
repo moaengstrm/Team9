@@ -38,7 +38,8 @@ public class TestProjekt {
                 JOptionPane.showMessageDialog(null, "Databasfel!");
             }
 
-            new MainWindow(idb).setVisible(true);
+            new InloggSida(idb).setVisible(true);
+            //new MainWindow(idb).setVisible(true);
         }
     
 }
