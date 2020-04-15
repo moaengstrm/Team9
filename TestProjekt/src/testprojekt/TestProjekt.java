@@ -16,6 +16,11 @@ import oru.inf.InfException;
 public class TestProjekt {   
     
         private static InfDB idb;
+        
+        public static InfDB getDB() {
+            return idb;
+            
+        }
     
         public static void main(String[] args) {
             try {
@@ -29,8 +34,6 @@ public class TestProjekt {
                 }
                 System.out.println(sokvagDatabas);
                 idb = new InfDB(sokvagDatabas);
-
-
             } catch (InfException ettUndantag) {
                 JOptionPane.showMessageDialog(null, "Databasfel!");
             }

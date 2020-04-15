@@ -63,10 +63,10 @@ public class BlogV2 extends javax.swing.JFrame {
          }
     });
     
-    public BlogV2(InfDB idb) {
+    public BlogV2() {
         initComponents();
         
-        this.idb = idb;
+        idb = TestProjekt.getDB();
         validator = new Validator();
         dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         newCategory = new NewCategoryWindow();
