@@ -17,6 +17,7 @@ import java.util.Date;
 import java.util.HashMap;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import oru.inf.InfDB;
 
 
 
@@ -26,6 +27,7 @@ import javax.swing.event.DocumentListener;
  */
 public class BlogV2 extends javax.swing.JFrame {
     
+    InfDB idb;
     Profile profile;
     Validator validator;
     SimpleDateFormat dateFormat;
@@ -61,9 +63,10 @@ public class BlogV2 extends javax.swing.JFrame {
          }
     });
     
-    public BlogV2() {
+    public BlogV2(InfDB idb) {
         initComponents();
         
+        this.idb = idb;
         validator = new Validator();
         dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         newCategory = new NewCategoryWindow();
@@ -621,13 +624,5 @@ public class BlogV2 extends javax.swing.JFrame {
     private javax.swing.JTextField txtTitle;
     // End of variables declaration//GEN-END:variables
 
-    public static void main(String args[]) {
-
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new BlogV2().setVisible(true);
-            }
-        });
-    }
     
 }

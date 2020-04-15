@@ -28,17 +28,17 @@ public class BloggStart {
     private static InfDB idb;
     
     
-    public static void main(final String[] args) {
-        try {
-            idb = new InfDB("C://db//BloggData.fdb");
-        }
-        catch (InfException e) {
-            JOptionPane.showMessageDialog(null, "Något gick fel!");
-            System.out.println("Internt felmeddelande:" + e.getMessage());
-        }
-        
-        new InloggSida(idb).setVisible(true); 
-    }   
+//    public static void main(final String[] args) {
+//        try {
+//            idb = new InfDB("C://db//BloggData.fdb");
+//        }
+//        catch (InfException e) {
+//            JOptionPane.showMessageDialog(null, "Något gick fel!");
+//            System.out.println("Internt felmeddelande:" + e.getMessage());
+//        }
+//        
+//        new InloggSida(idb).setVisible(true); 
+//    }   
 
 }
     

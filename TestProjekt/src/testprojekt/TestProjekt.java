@@ -5,21 +5,39 @@
  */
 package testprojekt;
 
+import javax.swing.JOptionPane;
+import oru.inf.InfDB;
+import oru.inf.InfException;
+
 /**
  *
  * @author isakj
  */
-public class TestProjekt {
+public class TestProjekt {   
     
-    private static MainWindow mainWindow = new MainWindow();
+        private static InfDB idb;
+    
+        public static void main(String[] args) {
+            try {
+                String aktuellMapp = System.getProperty("user.dir");
+                String os = System.getProperty("os.name").toLowerCase();
+                String sokvagDatabas;
+                if (os.contains("mac")) {
+                    sokvagDatabas = aktuellMapp + ("/db/BloggData.FDB");
+                } else {
+                    sokvagDatabas = aktuellMapp + ("\\db\\BloggData.FDB");
+                }
+                System.out.println(sokvagDatabas);
+                idb = new InfDB(sokvagDatabas);
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-        mainWindow.setVisible(true);
-        
-    }
+
+            } catch (InfException ettUndantag) {
+                JOptionPane.showMessageDialog(null, "Databasfel!");
+            }
+
+            new MainWindow(idb).setVisible(true);
+        }
     
 }
+    
+

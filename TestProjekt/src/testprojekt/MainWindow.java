@@ -22,18 +22,12 @@ public class MainWindow extends javax.swing.JFrame {
     BlogV2 blog;
     private InfDB idb;
     
-    public MainWindow() {
+    public MainWindow(InfDB idb) {
         initComponents();
+        this.idb = idb;
         setLocationRelativeTo(this);
 
-        try {
-            String aktuellMapp = System.getProperty("user.dir");
-            String sokVag = aktuellMapp + "\\db\\BloggData.FDB";
-            idb = new InfDB(sokVag);
-        } catch(InfException ie) {
-            JOptionPane.showMessageDialog(null, ie.getMessage());
-        }
-        blog = new BlogV2();
+       
     }
 
     /**
