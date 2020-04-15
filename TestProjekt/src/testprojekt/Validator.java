@@ -5,7 +5,13 @@
  */
 package testprojekt;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import oru.inf.InfDB;
+import oru.inf.InfException;
 
 /**
  *
@@ -13,8 +19,10 @@ import javax.swing.JOptionPane;
  */
 public class Validator {
     
-    public Validator() {
+    private InfDB idb;
     
+    public Validator() {
+        idb = TestProjekt.getDB();
     }
     
     public boolean validateNewPost(String title, String text, String category) {
@@ -35,4 +43,66 @@ public class Validator {
         return valid;
     }
     
+    public static boolean tfIsNotEmpty(JTextField... textFields) {
+
+        // Sätter resultat till sant
+        boolean result = true;
+
+        for (JTextField textField : textFields) {
+        // If-sats som kontrollerar om rutan är tom
+            if (textField.getText().isEmpty()) {
+                result = false;
+            }
+        }
+        if (!result) {
+            JOptionPane.showMessageDialog(null, "En eller flera textrutor är tomma!");
+        }
+
+        // Returnerar resultat
+        return result;
+    }
+    
+     public static boolean passwordIsNotEmpty(JPasswordField... passwordFields) {
+
+        // Sätter resultat till sant
+        boolean result = true;
+
+        for (JPasswordField passwordField : passwordFields) {
+            String password = new String(passwordField.getPassword());
+        // If-sats som kontrollerar om rutan är tom
+            if (password.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Fältet 'Lösenord' är tomt");
+                passwordField.requestFocus();
+                result = false;
+            }
+        }
+        // Returnerar resultat
+        return result;
+    }
+     
+    public boolean validateRegistration(String userName, String email) {
+        boolean valid = false;
+        try {
+            valid = true;
+            String query = "SELECT Anvandarnamn, Epost FROM ANVANDARE, Granskning";
+            ArrayList<HashMap<String, String>> results = idb.fetchRows(query);
+            if (results != null) {
+                for (HashMap<String, String> result : results) {
+                    String name = result.get("ANVANDARNAMN");
+                    String emailAdress = result.get("EPOST");
+                    if (userName.equals(name)) {
+                        valid = false;
+                        JOptionPane.showMessageDialog(null, "Användarnamnet är upptaget");
+                    } 
+                    if (email.equalsIgnoreCase(emailAdress)) {
+                        valid = false;
+                        JOptionPane.showMessageDialog(null, "E-postadressen används redan");
+                    }
+                }
+            }
+        } catch(InfException ie) {
+            
+        }
+        return valid;
+    }
 }

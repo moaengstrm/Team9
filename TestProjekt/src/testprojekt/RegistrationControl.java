@@ -11,6 +11,8 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -87,24 +89,35 @@ public class RegistrationControl {
     }
     
     public void acceptRegistration(String userName){
-    try{
-        String query = "Select * from granskning where anvandarnamn = '" + userName + "'";
-        HashMap<String, String> information = idb.fetchRow(query);
-        
-        String id = idb.getAutoIncrement("ANVANDARE", "ANVANDAR_ID");
-        String name = information.get("NAMN");
-        String email = information.get("EPOST");
-        String phone = information.get("TELE");
-        String username = information.get("ANVANDARNAMN");
-        String password = information.get("LOSEN");
-        
-        query = "Insert into anvandare values ('" + password + "', " + id + ", '" + username + "', '" + email + "', '" + phone + "', '" + name + "')";
-        idb.insert(query);
-        denyRegistration(username);
-    
-    } catch(InfException ie) {
-    System.out.println(ie.getMessage());
+        try{
+            String query = "Select * from granskning where anvandarnamn = '" + userName + "'";
+            HashMap<String, String> information = idb.fetchRow(query);
+
+            String id = idb.getAutoIncrement("ANVANDARE", "ANVANDAR_ID");
+            String name = information.get("NAMN");
+            String email = information.get("EPOST");
+            String phone = information.get("TELE");
+            String username = information.get("ANVANDARNAMN");
+            String password = information.get("LOSEN");
+
+            query = "Insert into anvandare values ('" + password + "', " + id + ", '" + username + "', '" + email + "', '" + phone + "', '" + name + "')";
+            idb.insert(query);
+            denyRegistration(username);
+
+        } catch (InfException ie) {
+        System.out.println(ie.getMessage());
+        }
     }
+    
+    public void register(String name, String userName, String phone, String email, String password) {
+        try {
+            String id = idb.getAutoIncrement("Granskning", "GranskID");
+            String query = "INSERT INTO Granskning values('"+name+"', '"+email+"', '" + phone + 
+                           "', '" + userName + "', '" + password + "', " + id + ");";
+            idb.insert(query);
+        } catch (InfException ie) {
+            
+        }
     }
     
 }
