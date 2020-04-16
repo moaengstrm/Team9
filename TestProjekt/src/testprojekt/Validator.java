@@ -84,27 +84,21 @@ public class Validator {
         boolean valid = false;
         try {
             valid = true;
-            String query = "SELECT * FROM ANVANDARE, Granskning";
+            String query = "SELECT Anvandare.ANVANDAR_NAMN as anvardareNamn, Granskning.ANVANDARNAMN as granskningNamn FROM ANVANDARE, Granskning";
             ArrayList<HashMap<String, String>> results = idb.fetchRows(query);
             if (results != null) {
                 for (HashMap<String, String> result : results) {
-                    String name = result.get("ANVANDARNAMN");
-                    System.out.println(name);
-                    String emailAdress = result.get("EPOST");
-                    if (userName.equals(name)) {
+                    String name = result.get("ANVANDARENAMN");
+                    String name2 = result.get("GRANSKNINGNAMN");
+                    if (userName.equalsIgnoreCase(name) || userName.equalsIgnoreCase(name2)) {
                         valid = false;
                         JOptionPane.showMessageDialog(null, "Användarnamnet är upptaget");
                         break;
                     } 
-                    if (email.equalsIgnoreCase(emailAdress)) {
-                        valid = false;
-                        JOptionPane.showMessageDialog(null, "E-postadressen används redan");
-                        break;
-                    }
                 }
             }
         } catch(InfException ie) {
-            
+            System.out.println(ie.getMessage());
         }
         return valid;
     }
