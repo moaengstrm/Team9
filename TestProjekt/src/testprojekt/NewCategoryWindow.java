@@ -13,6 +13,7 @@ import oru.inf.InfException;
  */
 public class NewCategoryWindow extends javax.swing.JFrame {
     InfDB idb; 
+   
     /**
      * Creates new form NewCategoryWindow
      */
@@ -91,11 +92,9 @@ public class NewCategoryWindow extends javax.swing.JFrame {
         String newCategory = txtCategoryName.getText();
 
         try {
-            String maxKaid = idb.fetchSingle("SELECT MAX(KAID) from kategori;");
+            String maxKaid = idb.fetchSingle("SELECT COUNT (*) FROM KATEGORI");
             System.out.println(maxKaid);
-            if(maxKaid.equals("null")){
-                maxKaid = "0";
-            }
+            
 
             int maxKaidInt = Integer.parseInt(maxKaid);
             int maxKaidIntIncremented = maxKaidInt + 1; 
@@ -107,6 +106,8 @@ public class NewCategoryWindow extends javax.swing.JFrame {
             idb.insert(query);
 
             JOptionPane.showMessageDialog(null, "Kategorin '" + newCategory + "' har blivit tillagd.");
+            
+    
 
         } catch (Exception e) {
             System.out.println(e.getMessage());

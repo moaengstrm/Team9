@@ -15,9 +15,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import oru.inf.InfDB;
+import oru.inf.InfException;
 
 
 
@@ -70,6 +74,7 @@ public class BlogV2 extends javax.swing.JFrame {
         validator = new Validator();
         dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         newCategory = new NewCategoryWindow();
+        setCategoryCbs(); 
         
         setLocationRelativeTo(this);
         pnlNewPostTab.setVisible(false);
@@ -351,6 +356,20 @@ public class BlogV2 extends javax.swing.JFrame {
         lblFilter.setText("Filter");
 
         cbCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Kategori --", "Jobb", "Fritid" }));
+        cbCategory.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+                cbCategoryPopupMenuWillBecomeVisible(evt);
+            }
+        });
+        cbCategory.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbCategoryMouseClicked(evt);
+            }
+        });
 
         btnShow.setText("Visa");
         btnShow.addActionListener(new java.awt.event.ActionListener() {
@@ -431,6 +450,20 @@ public class BlogV2 extends javax.swing.JFrame {
         scrollPane.setViewportView(txtText);
 
         cbCategoryNewPost.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Kategori --", "Jobb", "Fritid" }));
+        cbCategoryNewPost.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+                cbCategoryNewPostPopupMenuWillBecomeVisible(evt);
+            }
+        });
+        cbCategoryNewPost.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbCategoryNewPostMouseClicked(evt);
+            }
+        });
         cbCategoryNewPost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbCategoryNewPostActionPerformed(evt);
@@ -477,7 +510,7 @@ public class BlogV2 extends javax.swing.JFrame {
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(291, 291, 291)
                         .addComponent(btnPost, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 380, Short.MAX_VALUE))
+                        .addGap(0, 388, Short.MAX_VALUE))
                     .addComponent(scrollPane)
                     .addGroup(pnlNewPostTabLayout.createSequentialGroup()
                         .addComponent(lblTitle)
@@ -528,7 +561,7 @@ public class BlogV2 extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlNewPostTab, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)
+            .addComponent(pnlNewPostTab, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(pnlBlogTab, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -586,8 +619,37 @@ public class BlogV2 extends javax.swing.JFrame {
         pnlNewPostTab.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    
+    private void cbCategoryNewPostMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbCategoryNewPostMouseClicked
+       // setCategoryCbs();
+    }//GEN-LAST:event_cbCategoryNewPostMouseClicked
 
+    private void cbCategoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbCategoryMouseClicked
+       // setCategoryCbs();
+    }//GEN-LAST:event_cbCategoryMouseClicked
+
+    private void cbCategoryPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_cbCategoryPopupMenuWillBecomeVisible
+       setCategoryCbs();
+    }//GEN-LAST:event_cbCategoryPopupMenuWillBecomeVisible
+
+    private void cbCategoryNewPostPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_cbCategoryNewPostPopupMenuWillBecomeVisible
+       setCategoryCbs();
+    }//GEN-LAST:event_cbCategoryNewPostPopupMenuWillBecomeVisible
+
+    
+   
+   public void setCategoryCbs(){ 
+        try {
+            ArrayList<String> kategorier = idb.fetchColumn("SELECT namn FROM KATEGORI");
+            DefaultComboBoxModel kategori = new DefaultComboBoxModel();
+            for(String listaKategorier : kategorier){
+                kategori.addElement(listaKategorier);
+            }
+            cbCategory.setModel(kategori);
+            cbCategoryNewPost.setModel(kategori);
+        } catch (InfException ex) {
+            Logger.getLogger(BlogV2.class.getName()).log(Level.SEVERE, null, ex);
+        }
+   }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNewPost;
