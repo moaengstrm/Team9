@@ -90,23 +90,42 @@ public class NewCategoryWindow extends javax.swing.JFrame {
 
     private void btnAddNewCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewCategoryActionPerformed
         String newCategory = txtCategoryName.getText();
+        
+        
 
         try {
-            String maxKaid = idb.fetchSingle("SELECT COUNT (*) FROM KATEGORI");
+            
+          if (idb.fetchSingle("SELECT COUNT (*) FROM KATEGORI where namn = '" +newCategory +"';").equals("1")){
+               JOptionPane.showMessageDialog(null, "Kategorin finns redan tillagd!");
+          }
+          
+          
+          else { 
+             
+            int kaid = 0;  
+            if (idb.fetchSingle("SELECT count (*) FROM KATEGORI").equals("0")) {
+            kaid = 1;
+          }
+            else {
+            String maxKaid = idb.fetchSingle("SELECT max (kaid) FROM KATEGORI");
             System.out.println(maxKaid);
             
 
             int maxKaidInt = Integer.parseInt(maxKaid);
-            int maxKaidIntIncremented = maxKaidInt + 1; 
+            kaid = maxKaidInt + 1; 
 
-            System.out.println(maxKaidIntIncremented);
-
-            String query = "insert into Kategori (KAID, Namn) values (" + maxKaidIntIncremented + ", '" + newCategory + "')";
+            System.out.println(kaid);
+            
+            
+            }
+            String query = "insert into Kategori (KAID, Namn) values (" + kaid + ", '" + newCategory + "')";
 
             idb.insert(query);
 
             JOptionPane.showMessageDialog(null, "Kategorin '" + newCategory + "' har blivit tillagd.");
             
+            this.dispose();
+          }
     
 
         } catch (Exception e) {

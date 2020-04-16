@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import oru.inf.InfDB;
@@ -355,7 +356,6 @@ public class BlogV2 extends javax.swing.JFrame {
 
         lblFilter.setText("Filter");
 
-        cbCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Kategori --", "Jobb", "Fritid" }));
         cbCategory.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
             public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
@@ -449,7 +449,6 @@ public class BlogV2 extends javax.swing.JFrame {
         });
         scrollPane.setViewportView(txtText);
 
-        cbCategoryNewPost.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Kategori --", "Jobb", "Fritid" }));
         cbCategoryNewPost.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
             public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
@@ -628,24 +627,46 @@ public class BlogV2 extends javax.swing.JFrame {
     }//GEN-LAST:event_cbCategoryMouseClicked
 
     private void cbCategoryPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_cbCategoryPopupMenuWillBecomeVisible
-       setCategoryCbs();
+        try {
+            if(idb.fetchSingle("SELECT count (*) FROM KATEGORI").equals("0")){
+                JOptionPane.showMessageDialog(null, "Det finns ingen kategori tillagd");
+            }
+            setCategoryCbs();
+        } catch (InfException ex) {
+            Logger.getLogger(BlogV2.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_cbCategoryPopupMenuWillBecomeVisible
 
     private void cbCategoryNewPostPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_cbCategoryNewPostPopupMenuWillBecomeVisible
-       setCategoryCbs();
+        try {
+            if(idb.fetchSingle("SELECT count (*) FROM KATEGORI").equals("0")){
+                JOptionPane.showMessageDialog(null, "Det finns ingen kategori tillagd");
+            }
+            setCategoryCbs();
+        } catch (InfException ex) {
+            Logger.getLogger(BlogV2.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_cbCategoryNewPostPopupMenuWillBecomeVisible
 
     
    
    public void setCategoryCbs(){ 
         try {
+            
+            if(idb.fetchSingle("SELECT count (*) FROM KATEGORI").equals("0")){
+            
+            }
+            else{
             ArrayList<String> kategorier = idb.fetchColumn("SELECT namn FROM KATEGORI");
             DefaultComboBoxModel kategori = new DefaultComboBoxModel();
+          
             for(String listaKategorier : kategorier){
                 kategori.addElement(listaKategorier);
-            }
+            
+           }
             cbCategory.setModel(kategori);
             cbCategoryNewPost.setModel(kategori);
+            }
         } catch (InfException ex) {
             Logger.getLogger(BlogV2.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -257,11 +257,7 @@
             <Component class="javax.swing.JComboBox" name="cbCategory">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="3">
-                    <StringItem index="0" value="-- Kategori --"/>
-                    <StringItem index="1" value="Jobb"/>
-                    <StringItem index="2" value="Fritid"/>
-                  </StringArray>
+                  <StringArray count="0"/>
                 </Property>
               </Properties>
               <Events>
@@ -400,11 +396,7 @@
         <Component class="javax.swing.JComboBox" name="cbCategoryNewPost">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="3">
-                <StringItem index="0" value="-- Kategori --"/>
-                <StringItem index="1" value="Jobb"/>
-                <StringItem index="2" value="Fritid"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
           <Events>
