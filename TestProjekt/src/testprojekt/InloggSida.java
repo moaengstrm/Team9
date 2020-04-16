@@ -30,7 +30,7 @@ public class InloggSida extends javax.swing.JFrame {
     public InloggSida(InfDB idb) {
        this.idb=idb;
        initComponents();
-       testmetod();
+       //testmetod();
         
         
     }
