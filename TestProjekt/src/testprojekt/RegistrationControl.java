@@ -111,9 +111,12 @@ public class RegistrationControl {
     
     public void register(String name, String userName, String phone, String email, String password) {
         try {
-            String id = idb.getAutoIncrement("Granskning", "GranskID");
-            String query = "INSERT INTO Granskning values('"+name+"', '"+email+"', '" + phone + 
+            String query = "select count(*) from granskning";
+            int id = Integer.parseInt(idb.fetchSingle(query)) + 1;
+       
+            query = "INSERT INTO Granskning values('"+name+"', '"+email+"', '" + phone + 
                            "', '" + userName + "', '" + password + "', " + id + ");";
+            System.out.println(query);
             idb.insert(query);
         } catch (InfException ie) {
             
