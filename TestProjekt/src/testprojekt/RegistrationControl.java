@@ -92,15 +92,18 @@ public class RegistrationControl {
         try{
             String query = "Select * from granskning where anvandarnamn = '" + userName + "'";
             HashMap<String, String> information = idb.fetchRow(query);
-
-            String id = idb.getAutoIncrement("ANVANDARE", "ANVANDAR_ID");
+            
+            String test = idb.getAutoIncrement("Anvandare", "Anvandar_ID");
+            int id = test == null ? 1 : Integer.parseInt(test) + 1;
+            
+            //String id = idb.getAutoIncrement("ANVANDARE", "ANVANDAR_ID");
             String name = information.get("NAMN");
             String email = information.get("EPOST");
             String phone = information.get("TELE");
             String username = information.get("ANVANDARNAMN");
             String password = information.get("LOSEN");
 
-            query = "Insert into anvandare values ('" + password + "', " + id + ", '" + username + "', '" + email + "', '" + phone + "', '" + name + "')";
+            query = "Insert into anvandare values ('" + password + "', " + id + ", '" + username + "', '" + email + "', '" + phone + "', '" + name + "', 'N')";
             idb.insert(query);
             denyRegistration(username);
 
@@ -111,15 +114,16 @@ public class RegistrationControl {
     
     public void register(String name, String userName, String phone, String email, String password) {
         try {
-            String query = "select count(*) from granskning";
-            int id = Integer.parseInt(idb.fetchSingle(query)) + 1;
+            String test = idb.getAutoIncrement("Granskning", "Granskid");
+            int id = test == null ? 1 : Integer.parseInt(test) + 1;
        
-            query = "INSERT INTO Granskning values('"+name+"', '"+email+"', '" + phone + 
+            String query = "INSERT INTO Granskning values('"+name+"', '"+email+"', '" + phone + 
                            "', '" + userName + "', '" + password + "', " + id + ");";
             System.out.println(query);
             idb.insert(query);
         } catch (InfException ie) {
-            
+           
+            System.out.println(ie.getMessage());
         }
     }
     
