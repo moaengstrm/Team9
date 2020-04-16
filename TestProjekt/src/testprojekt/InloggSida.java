@@ -8,6 +8,7 @@ package testprojekt;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -173,9 +174,9 @@ public class InloggSida extends javax.swing.JFrame {
 
          String anvandaren = this.txtanvandarnamn.getText();
          String losen = this.txtlosenord.getText();
-        if ( 1<2) 
+        if (Validator.tfIsNotEmpty(txtanvandarnamn) && Validator.tfIsNotEmpty(txtlosenord)); 
         {
-         //Validering.KollaTextFalt2st(this.alienTf, (JTextField)this.alienLosenTf) && Validering.KollaTextFaltOchSifferFalt(this.alienTf))
+         //Validering.passwordIsNotEmpty(this.txtlosenord, (JTextField)this.alienLosenTf) && Validering.KollaTextFaltOchSifferFalt(this.alienTf))
             
         try
         {
@@ -186,8 +187,8 @@ public class InloggSida extends javax.swing.JFrame {
             
              if (anvandaren.equals(he) && losen.equals(lo)&& ads.equals("N")) {
                     this.setVisible(false);
-      
-                    new MainWindow(idb).setVisible(true);
+                    //new BlogV2(idb).setVisible(true);
+                    //new MainWindow(idb).setVisible(true);
                     //ValkommenAlien enAliensida = new ValkommenAlien(anvandaren,idb);
                     //enAliensida.setVisible(true);
                    
@@ -196,7 +197,8 @@ public class InloggSida extends javax.swing.JFrame {
              else if (anvandaren.equals(he) && losen.equals(lo)&& ads.equals("J"))  {
                      this.setVisible(false); 
                     JOptionPane.showMessageDialog(null, "admin inloggad");
-
+                    new MainWindow(idb).setVisible(true);
+ 
                  
                  
                
