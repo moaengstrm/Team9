@@ -187,7 +187,7 @@ public class InloggSida extends javax.swing.JFrame {
             
              if (anvandaren.equals(he) && losen.equals(lo)&& ads.equals("N")) {
                     this.setVisible(false);
-                    //new BlogV2(idb).setVisible(true);
+                    new BlogV2().setVisible(true);
                     //new MainWindow(idb).setVisible(true);
                     //ValkommenAlien enAliensida = new ValkommenAlien(anvandaren,idb);
                     //enAliensida.setVisible(true);
