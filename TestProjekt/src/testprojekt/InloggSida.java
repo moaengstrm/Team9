@@ -182,7 +182,9 @@ public class InloggSida extends javax.swing.JFrame {
              String an = this.idb.fetchSingle("select ANVANDAR_ID from ANVANDARE where ANVANDAR_NAMN = '" + anvandaren + "'" );
              String lo = this.idb.fetchSingle("select LOSEN from ANVANDARE where ANVANDAR_ID =" + an);
              String he = this.idb.fetchSingle("Select ANVANDAR_NAMN from anvandare where ANVANDAR_ID =" + an); 
-            if (anvandaren.equals(he) && losen.equals(lo)) {
+             String ads = this.idb.fetchSingle("select ADMINJANEJ from ANVANDARE where ANVANDAR_ID=" + an);
+            
+             if (anvandaren.equals(he) && losen.equals(lo)&& ads.equals("N")) {
                     this.setVisible(false);
       
                     new MainWindow(idb).setVisible(true);
@@ -191,9 +193,19 @@ public class InloggSida extends javax.swing.JFrame {
                    
                 }
            
-                else {
-                    JOptionPane.showMessageDialog(null, "Kunde inte hitta anvandaren");
+             else if (anvandaren.equals(he) && losen.equals(lo)&& ads.equals("J"))  {
+                     this.setVisible(false); 
+                    JOptionPane.showMessageDialog(null, "admin inloggad");
+
+                 
+                 
+               
                 }
+             
+             else {
+                 
+                 JOptionPane.showMessageDialog(null, "Kunde inte hitta anvandaren");
+             }
         }
         catch(InfException e)
         {
