@@ -34,20 +34,6 @@ public class InloggSida extends javax.swing.JFrame {
         
         
     }
-    
-        public void testmetod () {
-        
-        try { 
-        String utskrift = idb.fetchSingle("SELECT ANVANDAR_NAMN FROM ANVANDARE WHERE ANVANDAR_ID = 1");
-        //System.out.println(utskrift);
-        jLabel2.setText(utskrift);
-            
-        } catch (InfException ex) {
-            
-           
-            Logger.getLogger(InloggSida.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -58,7 +44,6 @@ public class InloggSida extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         lblanvandarnamn = new javax.swing.JLabel();
         lbllosen = new javax.swing.JLabel();
@@ -68,8 +53,6 @@ public class InloggSida extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel2.setText("namn");
 
         jLabel3.setFont(new java.awt.Font("Verdana Pro Semibold", 1, 24)); // NOI18N
         jLabel3.setText("Välkommen!");
@@ -114,9 +97,6 @@ public class InloggSida extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(109, 109, 109)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -154,9 +134,7 @@ public class InloggSida extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnloggain)
                     .addComponent(jButton1))
-                .addGap(22, 22, 22)
-                .addComponent(jLabel2)
-                .addContainerGap())
+                .addGap(50, 50, 50))
         );
 
         pack();
@@ -187,7 +165,7 @@ public class InloggSida extends javax.swing.JFrame {
             
              if (anvandaren.equals(he) && losen.equals(lo)&& ads.equals("N")) {
                     this.setVisible(false);
-                    new BlogV2().setVisible(true);
+                    new BlogV2(an).setVisible(true);
                     //new MainWindow(idb).setVisible(true);
                     //ValkommenAlien enAliensida = new ValkommenAlien(anvandaren,idb);
                     //enAliensida.setVisible(true);
@@ -197,7 +175,7 @@ public class InloggSida extends javax.swing.JFrame {
              else if (anvandaren.equals(he) && losen.equals(lo)&& ads.equals("J"))  {
                      this.setVisible(false); 
                     JOptionPane.showMessageDialog(null, "admin inloggad");
-                    new MainWindow(idb).setVisible(true);
+                    new MainWindow(idb, an).setVisible(true);
  
                  
                  
@@ -231,7 +209,6 @@ public class InloggSida extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnloggain;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel lblanvandarnamn;
     private javax.swing.JLabel lbllosen;

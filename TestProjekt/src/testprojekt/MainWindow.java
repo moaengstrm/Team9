@@ -23,10 +23,13 @@ public class MainWindow extends javax.swing.JFrame {
     
     private static InfDB idb;
     
-    public MainWindow(InfDB idb) {
+    String id;
+    
+    public MainWindow(InfDB idb, String id) {
         initComponents();
         this.idb = idb;
-        setLocationRelativeTo(this); 
+        setLocationRelativeTo(this);
+        this.id = id;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -92,7 +95,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // TODO add your handling code here:
 
-        new BlogV2().setVisible(true);
+        new BlogV2(id).setVisible(true);
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
