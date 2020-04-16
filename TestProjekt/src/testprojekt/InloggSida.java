@@ -64,6 +64,7 @@ public class InloggSida extends javax.swing.JFrame {
         txtanvandarnamn = new javax.swing.JTextField();
         txtlosenord = new javax.swing.JTextField();
         btnloggain = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -92,10 +93,16 @@ public class InloggSida extends javax.swing.JFrame {
 
         btnloggain.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         btnloggain.setText("Logga in");
-        btnloggain.setActionCommand("Logga in");
         btnloggain.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnloggainActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Registrera");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -113,16 +120,19 @@ public class InloggSida extends javax.swing.JFrame {
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(39, 39, 39)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblanvandarnamn, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbllosen, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(49, 49, 49)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtanvandarnamn)
-                            .addComponent(txtlosenord, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(132, 132, 132)
-                        .addComponent(btnloggain, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addGap(53, 53, 53)
+                                .addComponent(btnloggain, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblanvandarnamn, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbllosen, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(49, 49, 49)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtanvandarnamn)
+                                    .addComponent(txtlosenord, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE))))))
                 .addContainerGap(79, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -139,8 +149,10 @@ public class InloggSida extends javax.swing.JFrame {
                         .addGap(33, 33, 33)
                         .addComponent(lbllosen))
                     .addComponent(txtlosenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-                .addComponent(btnloggain)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnloggain)
+                    .addComponent(jButton1))
                 .addGap(22, 22, 22)
                 .addComponent(jLabel2)
                 .addContainerGap())
@@ -170,7 +182,9 @@ public class InloggSida extends javax.swing.JFrame {
              String an = this.idb.fetchSingle("select ANVANDAR_ID from ANVANDARE where ANVANDAR_NAMN = '" + anvandaren + "'" );
              String lo = this.idb.fetchSingle("select LOSEN from ANVANDARE where ANVANDAR_ID =" + an);
              String he = this.idb.fetchSingle("Select ANVANDAR_NAMN from anvandare where ANVANDAR_ID =" + an); 
-            if (anvandaren.equals(he) && losen.equals(lo)) {
+             String ads = this.idb.fetchSingle("select ADMINJANEJ from ANVANDARE where ANVANDAR_ID=" + an);
+            
+             if (anvandaren.equals(he) && losen.equals(lo)&& ads.equals("N")) {
                     this.setVisible(false);
       
                     new MainWindow(idb).setVisible(true);
@@ -179,9 +193,19 @@ public class InloggSida extends javax.swing.JFrame {
                    
                 }
            
-                else {
-                    JOptionPane.showMessageDialog(null, "Kunde inte hitta anvandaren");
+             else if (anvandaren.equals(he) && losen.equals(lo)&& ads.equals("J"))  {
+                     this.setVisible(false); 
+                    JOptionPane.showMessageDialog(null, "admin inloggad");
+
+                 
+                 
+               
                 }
+             
+             else {
+                 
+                 JOptionPane.showMessageDialog(null, "Kunde inte hitta anvandaren");
+             }
         }
         catch(InfException e)
         {
@@ -195,10 +219,16 @@ public class InloggSida extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnloggainActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       new Registration().setVisible(true);   
+// TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnloggain;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel lblanvandarnamn;
