@@ -91,6 +91,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "HEJ");
         new BlogV2().setVisible(true);
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
