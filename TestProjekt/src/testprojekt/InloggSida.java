@@ -174,7 +174,7 @@ public class InloggSida extends javax.swing.JFrame {
            
              else if (anvandaren.equals(he) && losen.equals(lo)&& ads.equals("J"))  {
                      this.setVisible(false); 
-                    JOptionPane.showMessageDialog(null, "admin inloggad");
+                    
                     new MainWindow(idb, an).setVisible(true);
  
                  
