@@ -36,7 +36,9 @@ public class Validator {
         } else if (text.length() > 2500) {
             JOptionPane.showMessageDialog(null, "Inlägget får inte vara längre än 2500 tecken");
             valid = false;
-        } else if (category.equals("-- Kategori --")) {
+        } else if(title.length() > 50) {
+            JOptionPane.showMessageDialog(null, "Titeln får inte vara längre än 50 tecken");
+        }else if (category.equals("-- Kategori --")) {
             JOptionPane.showMessageDialog(null, "Vänligen välj en kategori");
             valid = false;
         }

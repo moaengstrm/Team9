@@ -129,6 +129,7 @@ public class BlogV2 extends javax.swing.JFrame {
             template.setText(blogPosts.get(post).getText());
             template.setTitle(blogPosts.get(post).getTitle());
             template.setId(blogPosts.get(post).getID());
+            template.setCategory("#"+findCategoryName(blogPosts.get(post).getCategory()));
             String date = formatDate(blogPosts.get(post).getDate());
             template.setDate(date);
             
@@ -823,6 +824,17 @@ public class BlogV2 extends javax.swing.JFrame {
             result = idb.fetchSingle(query);
         } catch(InfException ie) {
                 
+        }
+        return result;
+    }
+    
+    public String findCategoryName(String id) {
+        String query = "Select Namn from Kategori where KAID = " + id;
+        String result = "";
+        try {
+            result = idb.fetchSingle(query);
+        } catch(InfException ie) {
+            System.out.println(ie.getMessage());
         }
         return result;
     }

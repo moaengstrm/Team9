@@ -53,6 +53,10 @@ public class BlogPostTemplate extends javax.swing.JPanel {
         lblDate.setText(date);
     }
     
+    public void setCategory(String name) {
+        lblCategory.setText(name);
+    }
+    
     public javax.swing.JTextArea getTextArea() {
         return txtText;
     }
@@ -82,6 +86,7 @@ public class BlogPostTemplate extends javax.swing.JPanel {
         btnEdit = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
         lblTitle = new javax.swing.JTextField();
+        lblCategory = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -121,6 +126,9 @@ public class BlogPostTemplate extends javax.swing.JPanel {
             }
         });
 
+        lblCategory.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        lblCategory.setText("#kategori");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -128,21 +136,25 @@ public class BlogPostTemplate extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblDate)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSave)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnEdit))
                     .addComponent(lblTitle)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtText)
                         .addGap(89, 89, 89))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblWrittenBy)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                        .addGap(372, 372, 372)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblDate)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblWrittenBy)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                                .addGap(237, 237, 237)))
+                        .addComponent(btnSave)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnEdit)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -159,7 +171,9 @@ public class BlogPostTemplate extends javax.swing.JPanel {
                             .addComponent(lblWrittenBy)
                             .addComponent(lblAuthor))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblDate))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblDate)
+                            .addComponent(lblCategory)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnEdit)
                         .addComponent(btnSave)))
@@ -209,6 +223,7 @@ public class BlogPostTemplate extends javax.swing.JPanel {
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnSave;
     private javax.swing.JLabel lblAuthor;
+    private javax.swing.JLabel lblCategory;
     private javax.swing.JLabel lblDate;
     private javax.swing.JTextField lblTitle;
     private javax.swing.JLabel lblWrittenBy;

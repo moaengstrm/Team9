@@ -24,7 +24,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="pnlNewPostTab" alignment="1" pref="877" max="32767" attributes="0"/>
+          <Component id="pnlNewPostTab" alignment="1" pref="883" max="32767" attributes="0"/>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Component id="pnlBlogTab" alignment="0" max="32767" attributes="0"/>
           </Group>
