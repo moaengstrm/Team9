@@ -5,8 +5,13 @@
  */
 package testprojekt;
 
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
+import oru.inf.InfException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -24,6 +29,7 @@ public class ConfirmRegistration extends javax.swing.JFrame {
     public ConfirmRegistration() {
         initComponents();
         idb = TestProjekt.getDB();
+        setAnvandareCbs();
         
         setLocationRelativeTo(this);
         
@@ -54,6 +60,8 @@ public class ConfirmRegistration extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         listRequests = new javax.swing.JList<>();
         jButton1 = new javax.swing.JButton();
+        btnTaBort = new javax.swing.JButton();
+        cmboAnvandare = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -140,7 +148,7 @@ public class ConfirmRegistration extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(lblPhone))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConfirm)
                     .addComponent(btnDecline))
@@ -161,6 +169,20 @@ public class ConfirmRegistration extends javax.swing.JFrame {
             }
         });
 
+        btnTaBort.setText("Ta bort användare");
+        btnTaBort.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTaBortActionPerformed(evt);
+            }
+        });
+
+        cmboAnvandare.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmboAnvandare.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmboAnvandareActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -169,11 +191,16 @@ public class ConfirmRegistration extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(cmboAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnTaBort, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(48, 48, 48))))
         );
@@ -182,9 +209,13 @@ public class ConfirmRegistration extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE))
+                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnTaBort)
+                    .addComponent(cmboAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
@@ -221,11 +252,53 @@ public class ConfirmRegistration extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void cmboAnvandareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmboAnvandareActionPerformed
+        // TODO add your handling code here:
+        
+       
+            
+        
+        
+    }//GEN-LAST:event_cmboAnvandareActionPerformed
+
+    private void btnTaBortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortActionPerformed
+        // TODO add your handling code here:
+        
+        try{
+        String cmboValue = cmboAnvandare.getSelectedItem().toString();
+        this.idb.fetchSingle("DELETE FROM anvandare WHERE namn = '" + cmboValue + "'");
+        
+            setAnvandareCbs();
+            
+        }
+        catch(InfException e)
+        {
+        JOptionPane.showMessageDialog(null, "Ett fel uppstod.");
+                System.out.println("Internt felmeddelande:" + e.getMessage());
+        }
+            
+    
+        
+    }//GEN-LAST:event_btnTaBortActionPerformed
+
+    
+ //   public String findCategoryName(String id) {
+   //     String query = "Select Namn from Kategori where KAID = " + id;
+     //   String result = "";
+       // try {
+         //   result = idb.fetchSingle(query);
+  //      } catch(InfException ie) {
+  //          System.out.println(ie.getMessage());
+  //      }
+  //      return result;
+  //  }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfirm;
     private javax.swing.JButton btnDecline;
+    private javax.swing.JButton btnTaBort;
+    private javax.swing.JComboBox<String> cmboAnvandare;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -239,4 +312,34 @@ public class ConfirmRegistration extends javax.swing.JFrame {
     private javax.swing.JLabel lblUserName;
     private javax.swing.JList<String> listRequests;
     // End of variables declaration//GEN-END:variables
+
+  
+    
+    
+    private void setAnvandareCbs() {
+        try{
+      
+            if(idb.fetchSingle("SELECT count (*) FROM anvandare").equals("0")){
+           
+            }
+            
+            else{
+        ArrayList<String> anvandaree = idb.fetchColumn("SELECT namn FROM ANVANDARE");
+            DefaultComboBoxModel anvandare = new DefaultComboBoxModel();
+          
+            anvandare.addElement("-- Användare --");
+            for(String anvandareLista : anvandaree){
+                anvandare.addElement(anvandareLista);
+            }
+            cmboAnvandare.setModel(anvandare);
+            }
+            
+        }
+        
+        catch(InfException e)
+        {
+        JOptionPane.showMessageDialog(null, "Ett fel uppstod.");
+                System.out.println("Internt felmeddelande:" + e.getMessage());
+        }
+    }
 }

@@ -427,6 +427,11 @@ public class BlogV2 extends javax.swing.JFrame {
         });
 
         cbShowFormal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Formella inlägg", "Informella inlägg" }));
+        cbShowFormal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbShowFormalActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Fritext");
 
@@ -649,7 +654,7 @@ public class BlogV2 extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlNewPostTab, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 877, Short.MAX_VALUE)
+            .addComponent(pnlNewPostTab, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 883, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(pnlBlogTab, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -816,6 +821,10 @@ public class BlogV2 extends javax.swing.JFrame {
                 System.out.println("Internt felmeddelande:" + e.getMessage());
         }
     }//GEN-LAST:event_btnSokProfilActionPerformed
+
+    private void cbShowFormalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbShowFormalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbShowFormalActionPerformed
 
     public String findCategoryID(String category) {    
         String result = "";
