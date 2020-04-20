@@ -252,6 +252,8 @@ public class BlogV2 extends javax.swing.JFrame {
         btnShow = new javax.swing.JToggleButton();
         jComboBox2 = new javax.swing.JComboBox<>();
         btnTillbaka = new javax.swing.JButton();
+        btnSokProfil = new javax.swing.JButton();
+        txtSok = new javax.swing.JTextField();
         pnlNewPostTab = new javax.swing.JPanel();
         lblTitle = new javax.swing.JLabel();
         txtTitle = new javax.swing.JTextField();
@@ -388,6 +390,13 @@ public class BlogV2 extends javax.swing.JFrame {
             }
         });
 
+        btnSokProfil.setText("Sök profil");
+        btnSokProfil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSokProfilActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -406,12 +415,19 @@ public class BlogV2 extends javax.swing.JFrame {
                                     .addComponent(jComboBox2, 0, 132, Short.MAX_VALUE)
                                     .addComponent(cbCategory, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
-                                .addComponent(btnShow, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                                .addComponent(btnShow, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(btnTillbaka)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(34, 34, 34)
+                                .addComponent(btnTillbaka))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(13, 13, 13)
+                                .addComponent(txtSok, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnSokProfil, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(scrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -425,7 +441,11 @@ public class BlogV2 extends javax.swing.JFrame {
                     .addComponent(btnShow))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(71, 71, 71)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSokProfil)
+                    .addComponent(txtSok, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(42, 42, 42)
                 .addComponent(btnNewPost, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnTillbaka)
@@ -570,7 +590,7 @@ public class BlogV2 extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlNewPostTab, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 877, Short.MAX_VALUE)
+            .addComponent(pnlNewPostTab, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 879, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(pnlBlogTab, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -669,6 +689,32 @@ public class BlogV2 extends javax.swing.JFrame {
 // TODO add your handling code here:
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
+    private void btnSokProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokProfilActionPerformed
+        // TODO add your handling code here:
+        try{
+        String anvandaresok = this.txtSok.getText();
+        String an = this.idb.fetchSingle("select ANVANDAR_ID from ANVANDARE where NAMN = '" + anvandaresok + "'");
+        String na = this.idb.fetchSingle("select NAMN from ANVANDARE where ANVANDAR_ID = '" + an + "'");
+        String em = this.idb.fetchSingle("select EPOST from ANVANDARE where ANVANDAR_ID= '" + an + "'");
+        String ph = this.idb.fetchSingle("select TELE from ANVANDARE where ANVANDAR_ID = '" + an + "'");
+        
+            if(anvandaresok.equals(na)) {
+              this.setVisible(false);
+            new Profile(idb,na,ph,em).setVisible(true);
+            
+           }
+     else {
+                 
+                 JOptionPane.showMessageDialog(null, "Kunde inte hitta anvandaren");
+             }
+        }
+        catch(InfException e)
+        {
+        JOptionPane.showMessageDialog(null, "Ett fel uppstod.");
+                System.out.println("Internt felmeddelande:" + e.getMessage());
+        }
+    }//GEN-LAST:event_btnSokProfilActionPerformed
+
     
    
    public void setCategoryCbs(){ 
@@ -697,6 +743,7 @@ public class BlogV2 extends javax.swing.JFrame {
     private javax.swing.JButton btnNewPost;
     private javax.swing.JButton btnPost;
     private javax.swing.JToggleButton btnShow;
+    private javax.swing.JButton btnSokProfil;
     private javax.swing.JButton btnTillbaka;
     private javax.swing.JComboBox<String> cbCategory;
     private javax.swing.JComboBox<String> cbCategoryNewPost;
@@ -725,6 +772,7 @@ public class BlogV2 extends javax.swing.JFrame {
     private testprojekt.BlogPostTemplate post5;
     private javax.swing.JScrollPane scrollPane;
     private javax.swing.JScrollPane scrollPanel;
+    private javax.swing.JTextField txtSok;
     private javax.swing.JTextArea txtText;
     private javax.swing.JTextField txtTitle;
     // End of variables declaration//GEN-END:variables
