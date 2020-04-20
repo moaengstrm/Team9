@@ -5,22 +5,60 @@
  */
 package testprojekt;
 
+import oru.inf.InfDB;
+import oru.inf.InfException;
 /**
  *
  * @author isakj
  */
 public class Profile extends javax.swing.JFrame {
+    
+      InfDB idb;
 
     /**
      * Creates new form Profile
      */
-    public Profile(String name, String phone, String email) {
+     
+  
+    
+    public Profile(InfDB idb, String name, String phone, String email) {
+        this.idb=idb;
         initComponents();
         setLocationRelativeTo(this);
         lblNameValue.setText(name);
         lblPhoneValue.setText(phone);
         lblEmailValue.setText(email);
+        
+        //public class Profile extends javax.swing.JFrame {
+    
+    // InfDB idb;
+   // private String namn;
+   // private String epost;
+   // private String tele;
+  
+    
+  //  public Profile(String namn) throws InfException {
+   //     initComponents();
+    //    setLocationRelativeTo(this);
+    //    this.namn = namn;
+    //    this.epost=epost;
+    //    this.tele=tele;
+        
+        
+     //   String id = this.idb.fetchSingle("select ANVANDAR_ID from ANVANDARE where NAMN = '" + namn + "'");
+      //  this.tele = this.idb.fetchSingle("select TELE from ANVANDARE where ANVANDAR_ID = " + id + "'");
+     //   this.epost = this.idb.fetchSingle("select EPOST from ANVANDARE where ANVANDAR_ID = " + id + "'");
+      //  lblNameValue.setText(namn);
+      //  lblPhoneValue.setText(tele);
+      //  lblEmailValue.setText(epost);
+       // }
+        
     }
+
+    Profile() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
