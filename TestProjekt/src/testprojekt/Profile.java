@@ -5,20 +5,16 @@
  */
 package testprojekt;
 
-import oru.inf.InfDB;
-import oru.inf.InfException;
 /**
  *
  * @author isakj
  */
 public class Profile extends javax.swing.JFrame {
-    
-    InfDB idb;
 
     /**
      * Creates new form Profile
      */
-    public Profile(InfDB idb, String name, String phone, String email) {
+    public Profile(String name, String phone, String email) {
         initComponents();
         setLocationRelativeTo(this);
         lblNameValue.setText(name);

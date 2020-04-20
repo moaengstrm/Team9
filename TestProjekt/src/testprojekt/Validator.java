@@ -52,6 +52,7 @@ public class Validator {
         // If-sats som kontrollerar om rutan är tom
             if (textField.getText().isEmpty()) {
                 result = false;
+                break;
             }
         }
         if (!result) {
@@ -74,6 +75,7 @@ public class Validator {
                 JOptionPane.showMessageDialog(null, "Fältet 'Lösenord' är tomt");
                 passwordField.requestFocus();
                 result = false;
+                break;
             }
         }
         // Returnerar resultat

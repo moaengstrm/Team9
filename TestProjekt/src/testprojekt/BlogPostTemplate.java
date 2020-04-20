@@ -5,6 +5,10 @@
  */
 package testprojekt;
 
+import javax.swing.JOptionPane;
+import oru.inf.InfDB;
+import oru.inf.InfException;
+
 /**
  *
  * @author isakj
@@ -14,8 +18,23 @@ public class BlogPostTemplate extends javax.swing.JPanel {
     /**
      * Creates new form NewJPanel
      */
+    
+    private InfDB idb;
+    private Validator validator;
+    private String id;
+    
+    
     public BlogPostTemplate() {
         initComponents();
+        validator = new Validator();
+        idb = TestProjekt.getDB();
+        btnSave.setVisible(false);
+        lblTitle.setEditable(false);
+        lblTitle.setBorder(null);
+    }
+    
+    public void setId(String id) {
+        this.id = id;
     }
     
     public void setTitle(String title) {
@@ -37,6 +56,15 @@ public class BlogPostTemplate extends javax.swing.JPanel {
     public javax.swing.JTextArea getTextArea() {
         return txtText;
     }
+    
+    public javax.swing.JButton getEditButton() {
+        return btnEdit;
+    }
+    
+    public javax.swing.JTextField getTitleField() {
+        return lblTitle;
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -47,15 +75,15 @@ public class BlogPostTemplate extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblTitle = new javax.swing.JLabel();
         lblWrittenBy = new javax.swing.JLabel();
         lblAuthor = new javax.swing.JLabel();
         txtText = new javax.swing.JTextArea();
         lblDate = new javax.swing.JLabel();
+        btnEdit = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
+        lblTitle = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
-
-        lblTitle.setText("Titel");
 
         lblWrittenBy.setText("Skrivet av ");
 
@@ -68,8 +96,30 @@ public class BlogPostTemplate extends javax.swing.JPanel {
         txtText.setText("Text");
         txtText.setWrapStyleWord(true);
 
+        lblDate.setFont(new java.awt.Font("DialogInput", 2, 12)); // NOI18N
         lblDate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDate.setText("yyyy-MM-dd");
+
+        btnEdit.setText("Ändra");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
+
+        btnSave.setText("Spara");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
+
+        lblTitle.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lblTitle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lblTitleActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -78,37 +128,89 @@ public class BlogPostTemplate extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblDate)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSave)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnEdit))
+                    .addComponent(lblTitle)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtText)
+                        .addGap(89, 89, 89))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblWrittenBy)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                        .addGap(122, 122, 122)
-                        .addComponent(lblDate, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtText))
+                        .addGap(372, 372, 372)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblTitle)
+                .addGap(8, 8, 8)
+                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtText, javax.swing.GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE)
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblWrittenBy)
-                    .addComponent(lblAuthor)
-                    .addComponent(lblDate))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(txtText, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblWrittenBy)
+                            .addComponent(lblAuthor))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblDate))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnEdit)
+                        .addComponent(btnSave)))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        // TODO add your handling code here:
+        txtText.setEditable(true);
+        lblTitle.setEditable(true);
+        txtText.requestFocus();
+        txtText.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lblTitle.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnEdit.setVisible(false);
+        btnSave.setVisible(true);
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        // TODO add your handling code here:
+        String text = txtText.getText().trim();
+        String title = lblTitle.getText();
+        if (validator.validateNewPost(title, text, "Jobb")) {
+            System.out.println(text.length());
+            String query = "update Inlagg set text = '" + text + "', Rubrik = '" + title + "' WHERE INLAGGSID = " + id;
+            try {
+                idb.update(query);
+            } catch(InfException ie) {
+                System.out.println(ie.getMessage());
+            }
+            JOptionPane.showMessageDialog(null, "Inlägget har ändrats");
+            btnSave.setVisible(false);
+            btnEdit.setVisible(true);
+            lblTitle.setEditable(false);
+            txtText.setEditable(false);
+            lblTitle.setBorder(null);
+            txtText.setBorder(null);
+        }
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void lblTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblTitleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblTitleActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnSave;
     private javax.swing.JLabel lblAuthor;
     private javax.swing.JLabel lblDate;
-    private javax.swing.JLabel lblTitle;
+    private javax.swing.JTextField lblTitle;
     private javax.swing.JLabel lblWrittenBy;
     private javax.swing.JTextArea txtText;
     // End of variables declaration//GEN-END:variables
