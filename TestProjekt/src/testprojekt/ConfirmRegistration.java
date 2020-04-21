@@ -62,6 +62,8 @@ public class ConfirmRegistration extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         btnTaBort = new javax.swing.JButton();
         cmboAnvandare = new javax.swing.JComboBox<>();
+        btnTaBortInlagg = new javax.swing.JButton();
+        cmboTaBortInlagg = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -183,6 +185,15 @@ public class ConfirmRegistration extends javax.swing.JFrame {
             }
         });
 
+        btnTaBortInlagg.setText("Ta bort inlägg");
+        btnTaBortInlagg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTaBortInlaggActionPerformed(evt);
+            }
+        });
+
+        cmboTaBortInlagg.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -191,18 +202,22 @@ public class ConfirmRegistration extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(cmboAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnTaBort, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(48, 48, 48))))
+                        .addGap(48, 48, 48))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cmboAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmboTaBortInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnTaBortInlagg)
+                            .addComponent(btnTaBort, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,7 +230,11 @@ public class ConfirmRegistration extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnTaBort)
                     .addComponent(cmboAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnTaBortInlagg)
+                    .addComponent(cmboTaBortInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
@@ -266,7 +285,7 @@ public class ConfirmRegistration extends javax.swing.JFrame {
         
         try{
         String cmboValue = cmboAnvandare.getSelectedItem().toString();
-        this.idb.fetchSingle("DELETE FROM anvandare WHERE namn = '" + cmboValue + "'");
+        this.idb.delete("DELETE FROM anvandare WHERE namn = '" + cmboValue + "'");
         
             setAnvandareCbs();
             
@@ -281,24 +300,33 @@ public class ConfirmRegistration extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnTaBortActionPerformed
 
+    private void btnTaBortInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortInlaggActionPerformed
+        // TODO add your handling code here:
+     //   try{
+    //    String cmboValue = cmboAnvandare.getSelectedItem().toString();
+     //   this.idb.fetchSingle("DELETE FROM anvandare WHERE namn = '" + cmboValue + "'");
+        
+    //        setAnvandareCbs();
+            
+    //    }
+    //    catch(InfException e)
+   //     {
+    //    JOptionPane.showMessageDialog(null, "Ett fel uppstod.");
+     //           System.out.println("Internt felmeddelande:" + e.getMessage());
+    //    }
+    }//GEN-LAST:event_btnTaBortInlaggActionPerformed
+
     
- //   public String findCategoryName(String id) {
-   //     String query = "Select Namn from Kategori where KAID = " + id;
-     //   String result = "";
-       // try {
-         //   result = idb.fetchSingle(query);
-  //      } catch(InfException ie) {
-  //          System.out.println(ie.getMessage());
-  //      }
-  //      return result;
-  //  }
+ 
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfirm;
     private javax.swing.JButton btnDecline;
     private javax.swing.JButton btnTaBort;
+    private javax.swing.JButton btnTaBortInlagg;
     private javax.swing.JComboBox<String> cmboAnvandare;
+    private javax.swing.JComboBox<String> cmboTaBortInlagg;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -313,7 +341,32 @@ public class ConfirmRegistration extends javax.swing.JFrame {
     private javax.swing.JList<String> listRequests;
     // End of variables declaration//GEN-END:variables
 
-  
+  private void setInlaggCbs() {
+        try{
+      
+            if(idb.fetchSingle("SELECT count (*) FROM inlagg").equals("0")){
+           
+            }
+            
+            else{
+        ArrayList<String> inlaggg = idb.fetchColumn("SELECT rubrik FROM inlagg");
+            DefaultComboBoxModel inlagg = new DefaultComboBoxModel();
+          
+            inlagg.addElement("-- Inlägg --");
+            for(String inlaggsLista : inlaggg){
+                inlagg.addElement(inlaggsLista);
+            }
+            cmboAnvandare.setModel(inlagg);
+            }
+            
+        }
+        
+        catch(InfException e)
+        {
+        JOptionPane.showMessageDialog(null, "Ett fel uppstod.");
+                System.out.println("Internt felmeddelande:" + e.getMessage());
+        }
+    }
     
     
     private void setAnvandareCbs() {
