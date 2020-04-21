@@ -71,6 +71,7 @@ public class BlogV2 extends javax.swing.JFrame {
     
     public BlogV2(String userID) {
         initComponents();
+        btnShow.setEnabled(false);
         this.userID = userID;
         idb = TestProjekt.getDB();
         validator = new Validator();
@@ -129,7 +130,6 @@ public class BlogV2 extends javax.swing.JFrame {
             template.setText(blogPosts.get(post).getText());
             template.setTitle(blogPosts.get(post).getTitle());
             template.setId(blogPosts.get(post).getID());
-            template.setCategory("#"+findCategoryName(blogPosts.get(post).getCategory()));
             String date = formatDate(blogPosts.get(post).getDate());
             template.setDate(date);
             
@@ -225,15 +225,8 @@ public class BlogV2 extends javax.swing.JFrame {
     public void setPosts() {
         try {
             try {
-                String cbValue = cbShowFormal.getSelectedItem().toString();
-                String table = (cbValue.equals("Formella inlägg")) ? "Formell" : "Informell";
-                String searchString = txtSearch.getText();
-                String where = ", " + table + " WHERE Inlagg.InlaggsID = " + table + ".InlaggsID" +
-                               " AND Text like '%" + searchString + "%'";
-                String query = "Select * FROM Inlagg" + where;
-                                System.out.println(query);
+                String query = "Select * FROM Inlagg";
                 ArrayList<HashMap<String, String>> posts = idb.fetchRows(query);
-                blogPosts.clear();
                 if (!posts.isEmpty()) {
                     for (HashMap<String, String> post : posts) {
                         String rubrik = post.get("RUBRIK");
@@ -252,10 +245,6 @@ public class BlogV2 extends javax.swing.JFrame {
         } catch (InfException ie) {
             System.out.println(ie.getMessage());
         }
-    }
-    
-    public void filterPosts() {
-        
     }
     
     
@@ -288,12 +277,8 @@ public class BlogV2 extends javax.swing.JFrame {
         lblFilter = new javax.swing.JLabel();
         cbCategory = new javax.swing.JComboBox<>();
         btnShow = new javax.swing.JToggleButton();
-        cbShowFormal = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
-        txtSearch = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
-        btnSokProfil = new javax.swing.JButton();
-        txtSok = new javax.swing.JTextField();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        btnTillbaka = new javax.swing.JButton();
         pnlNewPostTab = new javax.swing.JPanel();
         lblTitle = new javax.swing.JLabel();
         txtTitle = new javax.swing.JTextField();
@@ -307,7 +292,7 @@ public class BlogV2 extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         cbFormal = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
         scrollPanel.setForeground(new java.awt.Color(255, 255, 255));
@@ -413,11 +398,6 @@ public class BlogV2 extends javax.swing.JFrame {
                 cbCategoryMouseClicked(evt);
             }
         });
-        cbCategory.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbCategoryActionPerformed(evt);
-            }
-        });
 
         btnShow.setText("Visa");
         btnShow.addActionListener(new java.awt.event.ActionListener() {
@@ -426,27 +406,12 @@ public class BlogV2 extends javax.swing.JFrame {
             }
         });
 
-        cbShowFormal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Formella inlägg", "Informella inlägg" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Formella inlägg", "Informella inlägg" }));
 
-        jLabel1.setText("Fritext");
-
-        txtSearch.addActionListener(new java.awt.event.ActionListener() {
+        btnTillbaka.setText("Tillbaka");
+        btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSearchActionPerformed(evt);
-            }
-        });
-
-        jButton3.setText("Tillbaka");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        btnSokProfil.setText("Sök profil");
-        btnSokProfil.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSokProfilActionPerformed(evt);
+                btnTillbakaActionPerformed(evt);
             }
         });
 
@@ -461,28 +426,19 @@ public class BlogV2 extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnNewPost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblFilter)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lblFilter)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cbCategory, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cbShowFormal, 0, 170, Short.MAX_VALUE)
-                                    .addComponent(txtSearch))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnShow, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jComboBox2, 0, 132, Short.MAX_VALUE)
+                                    .addComponent(cbCategory, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addComponent(btnShow, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(txtSok)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSokProfil)
-                        .addGap(55, 55, 55)))
+                        .addGap(29, 29, 29)
+                        .addComponent(btnTillbaka)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(scrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -495,21 +451,13 @@ public class BlogV2 extends javax.swing.JFrame {
                     .addComponent(cbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnShow))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cbShowFormal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSokProfil)
-                    .addComponent(txtSok, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
+                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(71, 71, 71)
                 .addComponent(btnNewPost, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(67, 67, 67)
-                .addComponent(jButton3)
-                .addGap(21, 21, 21))
-            .addComponent(scrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnTillbaka)
+                .addGap(24, 24, 24))
+            .addComponent(scrollPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout pnlBlogTabLayout = new javax.swing.GroupLayout(pnlBlogTab);
@@ -655,7 +603,7 @@ public class BlogV2 extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlNewPostTab, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
+            .addComponent(pnlNewPostTab, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(pnlBlogTab, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -671,8 +619,6 @@ public class BlogV2 extends javax.swing.JFrame {
 
     private void btnShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowActionPerformed
         // TODO add your handling code here:
-        setPosts();
-        displayPosts(0);
     }//GEN-LAST:event_btnShowActionPerformed
 
     private void txtTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTitleActionPerformed
@@ -698,11 +644,7 @@ public class BlogV2 extends javax.swing.JFrame {
             String author = idb.fetchSingle("select Anvandar_namn from anvandare where anvandar_id = " + userID);
             String title = txtTitle.getText();
             String text = txtText.getText();
-            String category = cbCategoryNewPost.getSelectedItem().toString();
-            
-            if (!category.equals("-- Kategori --")) {
-                category = findCategoryID(category);
-            }
+            String category = findCategoryID(cbCategoryNewPost.getSelectedItem().toString());
 
             if (validator.validateNewPost(title, text, category)) {
                 
@@ -737,7 +679,7 @@ public class BlogV2 extends javax.swing.JFrame {
                 pnlBlogTab.setVisible(true);
             }
         } catch (InfException ie) {
-            System.out.println(ie.getMessage() + "test");
+            System.out.println(ie.getMessage());
         } 
     }//GEN-LAST:event_btnPostActionPerformed
 
@@ -777,45 +719,10 @@ public class BlogV2 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cbCategoryNewPostPopupMenuWillBecomeVisible
 
-    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchActionPerformed
-
-    private void cbCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCategoryActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbCategoryActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+    private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
         setVisible(false);
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void btnSokProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokProfilActionPerformed
-        // TODO add your handling code here:
-      
-     try{
-        String anvandaresok = this.txtSok.getText();
-        String an = this.idb.fetchSingle("select ANVANDAR_ID from ANVANDARE where NAMN = '" + anvandaresok + "'");
-        String na = this.idb.fetchSingle("select NAMN from ANVANDARE where ANVANDAR_ID = '" + an + "'");
-        String em = this.idb.fetchSingle("select EPOST from ANVANDARE where ANVANDAR_ID= '" + an + "'");
-        String ph = this.idb.fetchSingle("select TELE from ANVANDARE where ANVANDAR_ID = '" + an + "'");
-        
-            if(anvandaresok.equals(na)) {
-              this.setVisible(false);
-            new Profile(idb,na,ph,em).setVisible(true);
-            
-           }
-     else {
-                 
-                 JOptionPane.showMessageDialog(null, "Kunde inte hitta anvandaren");
-             }
-        }
-        catch(InfException e)
-        {
-        JOptionPane.showMessageDialog(null, "Ett fel uppstod.");
-                System.out.println("Internt felmeddelande:" + e.getMessage());
-        }
-    }//GEN-LAST:event_btnSokProfilActionPerformed
+// TODO add your handling code here:
+    }//GEN-LAST:event_btnTillbakaActionPerformed
 
     public String findCategoryID(String category) {    
         String result = "";
@@ -824,17 +731,6 @@ public class BlogV2 extends javax.swing.JFrame {
             result = idb.fetchSingle(query);
         } catch(InfException ie) {
                 
-        }
-        return result;
-    }
-    
-    public String findCategoryName(String id) {
-        String query = "Select Namn from Kategori where KAID = " + id;
-        String result = "";
-        try {
-            result = idb.fetchSingle(query);
-        } catch(InfException ie) {
-            System.out.println(ie.getMessage());
         }
         return result;
     }
@@ -859,7 +755,7 @@ public class BlogV2 extends javax.swing.JFrame {
             else{
             ArrayList<String> kategorier = idb.fetchColumn("SELECT namn FROM KATEGORI");
             DefaultComboBoxModel kategori = new DefaultComboBoxModel();
-            kategori.addElement("-- Kategori --");
+          
             for(String listaKategorier : kategorier){
                 kategori.addElement(listaKategorier);
             
@@ -876,15 +772,13 @@ public class BlogV2 extends javax.swing.JFrame {
     private javax.swing.JButton btnNewPost;
     private javax.swing.JButton btnPost;
     private javax.swing.JToggleButton btnShow;
-    private javax.swing.JButton btnSokProfil;
+    private javax.swing.JButton btnTillbaka;
     private javax.swing.JComboBox<String> cbCategory;
     private javax.swing.JComboBox<String> cbCategoryNewPost;
     private javax.swing.JComboBox<String> cbFormal;
-    private javax.swing.JComboBox<String> cbShowFormal;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblFilter;
     private javax.swing.JLabel lblLetterCount;
@@ -906,8 +800,6 @@ public class BlogV2 extends javax.swing.JFrame {
     private testprojekt.BlogPostTemplate post5;
     private javax.swing.JScrollPane scrollPane;
     private javax.swing.JScrollPane scrollPanel;
-    private javax.swing.JTextField txtSearch;
-    private javax.swing.JTextField txtSok;
     private javax.swing.JTextArea txtText;
     private javax.swing.JTextField txtTitle;
     // End of variables declaration//GEN-END:variables

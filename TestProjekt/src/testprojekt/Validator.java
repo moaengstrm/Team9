@@ -36,9 +36,7 @@ public class Validator {
         } else if (text.length() > 2500) {
             JOptionPane.showMessageDialog(null, "Inlägget får inte vara längre än 2500 tecken");
             valid = false;
-        } else if(title.length() > 50) {
-            JOptionPane.showMessageDialog(null, "Titeln får inte vara längre än 50 tecken");
-        }else if (category.equals("-- Kategori --")) {
+        } else if (category.equals("-- Kategori --")) {
             JOptionPane.showMessageDialog(null, "Vänligen välj en kategori");
             valid = false;
         }
@@ -54,7 +52,6 @@ public class Validator {
         // If-sats som kontrollerar om rutan är tom
             if (textField.getText().isEmpty()) {
                 result = false;
-                break;
             }
         }
         if (!result) {
@@ -77,7 +74,6 @@ public class Validator {
                 JOptionPane.showMessageDialog(null, "Fältet 'Lösenord' är tomt");
                 passwordField.requestFocus();
                 result = false;
-                break;
             }
         }
         // Returnerar resultat

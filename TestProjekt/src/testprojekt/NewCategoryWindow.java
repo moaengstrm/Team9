@@ -122,7 +122,7 @@ public class NewCategoryWindow extends javax.swing.JFrame {
 
             idb.insert(query);
 
-            JOptionPane.showMessageDialog(null, "Kategorin '" + newCategory + "' har blivit tillagd.");
+            
             
             this.dispose();
           }

@@ -30,7 +30,7 @@ public class InloggSida extends javax.swing.JFrame {
     public InloggSida(InfDB idb) {
        this.idb=idb;
        initComponents();
-       setLocationRelativeTo(this);
+       //testmetod();
         
         
     }
@@ -44,25 +44,18 @@ public class InloggSida extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        txtanvandarnamn = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
         lblanvandarnamn = new javax.swing.JLabel();
         lbllosen = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        txtanvandarnamn = new javax.swing.JTextField();
+        txtlosenord = new javax.swing.JTextField();
         btnloggain = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        passPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-
-        txtanvandarnamn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtanvandarnamnActionPerformed(evt);
-            }
-        });
+        jLabel3.setFont(new java.awt.Font("Verdana Pro Semibold", 1, 24)); // NOI18N
+        jLabel3.setText("Välkommen!");
 
         lblanvandarnamn.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         lblanvandarnamn.setText("Användarnamn:");
@@ -70,8 +63,17 @@ public class InloggSida extends javax.swing.JFrame {
         lbllosen.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         lbllosen.setText("Lösenord:");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/testprojekt/Images/Logga1.png"))); // NOI18N
-        jLabel1.setFocusTraversalPolicyProvider(true);
+        txtanvandarnamn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtanvandarnamnActionPerformed(evt);
+            }
+        });
+
+        txtlosenord.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtlosenordActionPerformed(evt);
+            }
+        });
 
         btnloggain.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         btnloggain.setText("Logga in");
@@ -81,7 +83,6 @@ public class InloggSida extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         jButton1.setText("Registrera");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,63 +90,51 @@ public class InloggSida extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(128, 128, 128)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblanvandarnamn)
-                                    .addComponent(lbllosen)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jButton1)))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtanvandarnamn)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(btnloggain))
-                            .addComponent(passPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(jLabel1)))
-                .addContainerGap(52, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(45, 45, 45)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblanvandarnamn)
-                    .addComponent(txtanvandarnamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbllosen)
-                    .addComponent(passPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnloggain)
-                    .addComponent(jButton1))
-                .addContainerGap(44, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(109, 109, 109)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addGap(53, 53, 53)
+                                .addComponent(btnloggain, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblanvandarnamn, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbllosen, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(49, 49, 49)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtanvandarnamn)
+                                    .addComponent(txtlosenord, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE))))))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblanvandarnamn)
+                            .addComponent(txtanvandarnamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(33, 33, 33)
+                        .addComponent(lbllosen))
+                    .addComponent(txtlosenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnloggain)
+                    .addComponent(jButton1))
+                .addGap(50, 50, 50))
         );
 
         pack();
@@ -155,44 +144,64 @@ public class InloggSida extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtanvandarnamnActionPerformed
 
-    private void btnloggainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnloggainActionPerformed
+    private void txtlosenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtlosenordActionPerformed
         // TODO add your handling code here:
-        String anvandaren = this.txtanvandarnamn.getText();
-        String losen = new String(passPassword.getPassword());
-        if (Validator.tfIsNotEmpty(txtanvandarnamn) && Validator.passwordIsNotEmpty(passPassword)) {
-            //Validering.passwordIsNotEmpty(this.txtlosenord, (JTextField)this.alienLosenTf) && Validering.KollaTextFaltOchSifferFalt(this.alienTf))
-            System.out.println("test");
-            try {
-                String an = this.idb.fetchSingle("select ANVANDAR_ID from ANVANDARE where ANVANDAR_NAMN = '" + anvandaren + "'");
-                String lo = this.idb.fetchSingle("select LOSEN from ANVANDARE where ANVANDAR_ID =" + an);
-                String he = this.idb.fetchSingle("Select ANVANDAR_NAMN from anvandare where ANVANDAR_ID =" + an);
-                String ads = this.idb.fetchSingle("select ADMINJANEJ from ANVANDARE where ANVANDAR_ID=" + an);
+    }//GEN-LAST:event_txtlosenordActionPerformed
 
-                if (anvandaren.equals(he) && losen.equals(lo) && ads.equals("N")) {
+    private void btnloggainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnloggainActionPerformed
+
+         String anvandaren = this.txtanvandarnamn.getText();
+         String losen = this.txtlosenord.getText();
+        if (Validator.tfIsNotEmpty(txtanvandarnamn) && Validator.tfIsNotEmpty(txtlosenord)); 
+        {
+         //Validering.passwordIsNotEmpty(this.txtlosenord, (JTextField)this.alienLosenTf) && Validering.KollaTextFaltOchSifferFalt(this.alienTf))
+            
+        try
+        {
+             String an = this.idb.fetchSingle("select ANVANDAR_ID from ANVANDARE where ANVANDAR_NAMN = '" + anvandaren + "'" );
+             String lo = this.idb.fetchSingle("select LOSEN from ANVANDARE where ANVANDAR_ID =" + an);
+             String he = this.idb.fetchSingle("Select ANVANDAR_NAMN from anvandare where ANVANDAR_ID =" + an); 
+             String ads = this.idb.fetchSingle("select ADMINJANEJ from ANVANDARE where ANVANDAR_ID=" + an);
+            
+             if (anvandaren.equals(he) && losen.equals(lo)&& ads.equals("N")) {
                     this.setVisible(false);
                     new BlogV2(an).setVisible(true);
                     //new MainWindow(idb).setVisible(true);
                     //ValkommenAlien enAliensida = new ValkommenAlien(anvandaren,idb);
                     //enAliensida.setVisible(true);
-
-                } else if (anvandaren.equals(he) && losen.equals(lo) && ads.equals("J")) {
-                    this.setVisible(false);
-                    new MainWindow(idb, an).setVisible(true);
-
-                } else {
-
-                    JOptionPane.showMessageDialog(null, "Kunde inte hitta anvandaren");
+                   
                 }
-            } catch (InfException e) {
-                JOptionPane.showMessageDialog(null, "Ett fel uppstod.");
-                System.out.println("Internt felmeddelande:" + e.getMessage());
-            }
+           
+             else if (anvandaren.equals(he) && losen.equals(lo)&& ads.equals("J"))  {
+                     this.setVisible(false); 
+                    
+                    new MainWindow(idb, an).setVisible(true);
+ 
+                 
+                 
+               
+                }
+             
+             else {
+                 
+                 JOptionPane.showMessageDialog(null, "Kunde inte hitta anvandaren");
+             }
         }
+        catch(InfException e)
+        {
+        JOptionPane.showMessageDialog(null, "Ett fel uppstod.");
+                System.out.println("Internt felmeddelande:" + e.getMessage());
+        }
+        
+        }
+
+
+        // TODO add your handling code here:
     }//GEN-LAST:event_btnloggainActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        new Registration().setVisible(true);
+       new Registration().setVisible(true);   
+// TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     
@@ -200,11 +209,10 @@ public class InloggSida extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnloggain;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel lblanvandarnamn;
     private javax.swing.JLabel lbllosen;
-    private javax.swing.JPasswordField passPassword;
     private javax.swing.JTextField txtanvandarnamn;
+    private javax.swing.JTextField txtlosenord;
     // End of variables declaration//GEN-END:variables
 }

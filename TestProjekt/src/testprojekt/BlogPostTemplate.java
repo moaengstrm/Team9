@@ -53,10 +53,6 @@ public class BlogPostTemplate extends javax.swing.JPanel {
         lblDate.setText(date);
     }
     
-    public void setCategory(String name) {
-        lblCategory.setText(name);
-    }
-    
     public javax.swing.JTextArea getTextArea() {
         return txtText;
     }
@@ -86,8 +82,11 @@ public class BlogPostTemplate extends javax.swing.JPanel {
         btnEdit = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
         lblTitle = new javax.swing.JTextField();
+<<<<<<< HEAD
         lblCategory = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+=======
+>>>>>>> 0cd07761845be80aa6a6c94fb3d355af20588e0f
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -102,7 +101,6 @@ public class BlogPostTemplate extends javax.swing.JPanel {
         txtText.setText("Text");
         txtText.setWrapStyleWord(true);
 
-        lblDate.setFont(new java.awt.Font("DialogInput", 2, 12)); // NOI18N
         lblDate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDate.setText("yyyy-MM-dd");
 
@@ -127,6 +125,7 @@ public class BlogPostTemplate extends javax.swing.JPanel {
             }
         });
 
+<<<<<<< HEAD
         lblCategory.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         lblCategory.setText("#kategori");
 
@@ -137,6 +136,8 @@ public class BlogPostTemplate extends javax.swing.JPanel {
             }
         });
 
+=======
+>>>>>>> 0cd07761845be80aa6a6c94fb3d355af20588e0f
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -148,6 +149,7 @@ public class BlogPostTemplate extends javax.swing.JPanel {
                         .addComponent(lblWrittenBy)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+<<<<<<< HEAD
                         .addGap(385, 385, 385))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblDate)
@@ -166,6 +168,18 @@ public class BlogPostTemplate extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtText)
                         .addContainerGap())))
+=======
+                        .addGap(44, 44, 44)
+                        .addComponent(btnSave)
+                        .addGap(74, 74, 74)
+                        .addComponent(lblDate, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEdit))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtText)
+                        .addGap(89, 89, 89)))
+                .addContainerGap())
+>>>>>>> 0cd07761845be80aa6a6c94fb3d355af20588e0f
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,6 +187,7 @@ public class BlogPostTemplate extends javax.swing.JPanel {
                 .addGap(8, 8, 8)
                 .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+<<<<<<< HEAD
                 .addComponent(txtText, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -185,6 +200,20 @@ public class BlogPostTemplate extends javax.swing.JPanel {
                     .addComponent(btnSave)
                     .addComponent(btnEdit)
                     .addComponent(jButton1))
+=======
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtText, javax.swing.GroupLayout.DEFAULT_SIZE, 18, Short.MAX_VALUE)
+                        .addGap(14, 14, 14)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblWrittenBy)
+                            .addComponent(lblAuthor)
+                            .addComponent(lblDate)
+                            .addComponent(btnSave)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnEdit)))
+>>>>>>> 0cd07761845be80aa6a6c94fb3d355af20588e0f
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -202,10 +231,9 @@ public class BlogPostTemplate extends javax.swing.JPanel {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-        String text = txtText.getText().trim();
+        String text = txtText.getText();
         String title = lblTitle.getText();
         if (validator.validateNewPost(title, text, "Jobb")) {
-            System.out.println(text.length());
             String query = "update Inlagg set text = '" + text + "', Rubrik = '" + title + "' WHERE INLAGGSID = " + id;
             try {
                 idb.update(query);
@@ -236,7 +264,6 @@ public class BlogPostTemplate extends javax.swing.JPanel {
     private javax.swing.JButton btnSave;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel lblAuthor;
-    private javax.swing.JLabel lblCategory;
     private javax.swing.JLabel lblDate;
     private javax.swing.JTextField lblTitle;
     private javax.swing.JLabel lblWrittenBy;
